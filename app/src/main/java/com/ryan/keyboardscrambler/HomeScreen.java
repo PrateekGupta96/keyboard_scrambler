@@ -3,14 +3,34 @@ package com.ryan.keyboardscrambler;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.widget.TextView;
 import android.view.MenuItem;
+import android.view.View;
+import android.content.Intent;
+import android.app.Activity;
 
-public class HomeScreen extends ActionBarActivity {
+public class HomeScreen extends Activity {
+
+    private TextView startTV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+
+        final String[] theWords = getIntent().getExtras().getStringArray("words");
+
+        startTV = (TextView) findViewById(R.id.startTV);
+
+        startTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent toMedium = new Intent(HomeScreen.this, Medium_Level.class);
+                toMedium.putExtra("words", theWords);
+                startActivity(toMedium);
+            }
+        });
     }
 
 

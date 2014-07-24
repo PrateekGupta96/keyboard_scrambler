@@ -48,8 +48,7 @@ public class SplashActivity extends Activity {
     private class LoadWords extends AsyncTask<Void, Integer, ArrayList<String>> {
 
         @Override
-        protected ArrayList<String> doInBackground(Void... params)
-        {
+        protected ArrayList<String> doInBackground(Void... params)  {
             InputStreamReader theISR = null;
             BufferedReader theReader = null;
 
@@ -76,7 +75,6 @@ public class SplashActivity extends Activity {
             }
 
             finally {
-
                 try {
                     if (theISR != null)
                         theISR.close();

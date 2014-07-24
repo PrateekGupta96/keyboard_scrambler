@@ -46,8 +46,6 @@ public abstract class KeyboardLevel extends Activity {
         width = size.x;
         height = size.y;
         adjustedHeight = (int) (0.25 * (height * 0.4));
-
-        theWords = getKeyboardWords();
     }
 
     /** Returns TextView with parameter character --> Used as keys */
@@ -88,12 +86,14 @@ public abstract class KeyboardLevel extends Activity {
         return theV;
     }
 
+    public void setWordChoice(final String[] theWords) {
+        this.theWords = theWords;
+    }
+
     protected abstract void userFinished();
 
     /** Returns random word */
     protected String getRandomWord() {
-        if(theWords == null)
-            theWords = getKeyboardWords();
         String theWord =  theWords[theGenerator.nextInt(theWords.length)].replace(" ", "");
 
         if(theWord.length() < 4)
@@ -117,7 +117,7 @@ public abstract class KeyboardLevel extends Activity {
 
 
     /** Returns array of stored words*/
-    protected String[] getKeyboardWords()   {
+    /*protected String[] getKeyboardWords()   {
         try {
             String theInput = "";
 
@@ -132,7 +132,7 @@ public abstract class KeyboardLevel extends Activity {
         }
 
         catch (Exception e) { e.printStackTrace(); return new String[]{e.toString()}; }
-    }
+    }*/
 
     protected void log(final int num)   {
         log(String.valueOf(num));

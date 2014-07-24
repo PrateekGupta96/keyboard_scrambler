@@ -13,6 +13,8 @@ public class Medium_Level extends KeyboardLevel {
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
 
+        super.setWordChoice(getIntent().getExtras().getStringArray("words"));
+
         setContentView(R.layout.medium_level);
 
         //Initialize the rows that will hold the character keys
