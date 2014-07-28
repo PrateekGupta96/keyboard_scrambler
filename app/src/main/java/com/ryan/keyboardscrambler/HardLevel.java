@@ -5,6 +5,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.Intent;
+import android.view.View;
 
 public class HardLevel extends Medium_Level {
 
@@ -46,13 +48,33 @@ public class HardLevel extends Medium_Level {
 
         refresh.setText(getHardLevelWord());
 
-        refresh.setOnClickListener(new android.view.View.OnClickListener() {
+        refresh.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(android.view.View v) {
+            public void onClick(View v) {
                 recreate();
             }
         });
     }
+
+    protected void userFinished() {
+        totalNumChars += refresh.getText().toString().length();
+        onWord++;
+        if(onWord > 5) {
+            stopTimer();
+            makeToast("You finished! " + getElapsed());
+            startActivity(new Intent(theC, HardLevel.class));
+            return;
+        }
+
+        int more = NUM_WORDS - onWord;
+
+        refresh.setText(getHardLevelWord());
+        if(more == 1)
+            makeToast(more + " more word!");
+        else
+            makeToast(more + " more words!");
+    }
+
 
     private String getHardLevelWord() {
         String theWord = getRandomWord() + " " + getRandomWord() + " " + getRandomWord();

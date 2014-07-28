@@ -43,7 +43,7 @@
         android:id="@+id/firstRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seconRow"
+        android:layout_above="@+id/secondRow"
         android:orientation="horizontal">
     </LinearLayout>
 

@@ -51,7 +51,7 @@ public class Medium_Level extends KeyboardLevel {
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
 
-        refresh.setText(getMediumLevel(getRandomWord()));
+        refresh.setText(getMediumLevel());
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +73,15 @@ public class Medium_Level extends KeyboardLevel {
 
         int more = NUM_WORDS - onWord;
 
-        refresh.setText(getMediumLevel(getRandomWord()));
+        refresh.setText(getMediumLevel());
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
 
-    private String getMediumLevel(final String theWord) {
+    private String getMediumLevel() {
+        final String theWord = super.getRandomWord();
         final String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
 
         switch (theGenerator.nextInt(1)) {
