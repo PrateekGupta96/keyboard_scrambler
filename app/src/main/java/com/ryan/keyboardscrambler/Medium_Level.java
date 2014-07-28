@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 public class Medium_Level extends KeyboardLevel {
 
     @Override
@@ -26,6 +27,9 @@ public class Medium_Level extends KeyboardLevel {
         //Shows characters user pressed
         userResponse = (TextView) findViewById(R.id.userResponseTV);
         userResponse.setCursorVisible(true);
+
+        timeTV = (TextView) findViewById(R.id.timeTV);
+        setUpTimer(timeTV);
 
         //Initializes dimension variables
         setDimensions();
@@ -58,7 +62,8 @@ public class Medium_Level extends KeyboardLevel {
     }
 
     protected void userFinished() {
-        makeToast("You finished!");
+        stopTimer();
+        makeToast("You finished! " + getElapsed());
         startActivity(new Intent(theC, HardLevel.class));
     }
 

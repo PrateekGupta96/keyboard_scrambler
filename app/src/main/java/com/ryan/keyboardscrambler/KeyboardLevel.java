@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -12,31 +14,86 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  * A level of the game
  */
 
 public abstract class KeyboardLevel extends Activity {
-    protected final Context theC = this;
-    protected int width, height, adjustedHeight;
 
     protected static final String fileName = "keyboard_scrambler_words.txt";
     protected static final Random theGenerator = new Random();
-    protected String[] theWords;
-
-
+    protected static final String DELETE_CHAR = "<";
+    protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
+    protected static final NumberFormat theTwoF = NumberFormat.getInstance();
+    protected final Context theC = this;
+    private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;
     protected TextView userResponse;
     protected TextView refresh;
+    protected TextView timeTV;
+    protected String[] theWords;
+    protected int width, height, adjustedHeight;
+    protected long startTime, elapsed;
+    protected boolean hasStarted = false;
+    private UpdateTimeTV theUpdater;
+    private int secs, minutes, seconds, milliseconds;
 
-    protected static final String DELETE_CHAR = "<";
+    /**
+     * Returns a scrambled version of a string
+     */
+    protected static String scrambleString(final String theString) {
+        List<Character> theChars = new ArrayList<Character>(theString.length());
+        for (int i = 0; i < theString.length(); i++)
+            theChars.add(theString.charAt(i));
 
-    protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
+        String theResult = "";
+
+        while (theChars.size() != 0)
+            theResult += theChars.remove((int) (Math.random() * theChars.size()));
+
+        return theResult;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    protected void setUpTimer(final TextView theTimeTV) {
+        theUpdater = new UpdateTimeTV(theTimeTV);
+    }
+
+    protected void startTimer() {
+        theHandler.postDelayed(theUpdater, 0);
+        startTime = System.currentTimeMillis();
+    }
+
+    protected void stopTimer() {
+        theHandler.removeCallbacks(theUpdater);
+    }
+
+    protected long getElapsedMilliseconds() {
+        return elapsed;
+    }
+
+    protected long getElapsedSeconds() {
+        return secs;
+    }
+
+    protected int getElapsedMinutes() {
+        return minutes;
+    }
+
+    protected String getElapsed() {
+        return "Min: " + minutes + " Secs: " + seconds + " MS: " + milliseconds;
+    }
+
+    ;
 
     /** Intializes dimension variables */
     protected void setDimensions()  {
@@ -63,6 +120,12 @@ public abstract class KeyboardLevel extends Activity {
         theV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!hasStarted) {
+                    hasStarted = true;
+                    startTimer();
+                }
+
                 String theR = userResponse.getText().toString();
 
                 if(theV.getText().toString().equals(DELETE_CHAR))  {
@@ -101,22 +164,9 @@ public abstract class KeyboardLevel extends Activity {
         return theWord;
     }
 
-    /** Returns a scrambled version of a string */
-    protected static String scrambleString(final String theString)  {
-        List<Character> theChars = new ArrayList<Character>(theString.length());
-        for(int i = 0; i < theString.length(); i++)
-            theChars.add(theString.charAt(i));
-
-        String theResult = "";
-
-        while(theChars.size() != 0)
-            theResult += theChars.remove((int)(Math.random()*theChars.size()));
-
-        return theResult;
-    }
-
-
-    /** Returns array of stored words*/
+    /**
+     * Returns array of stored words
+     */
     /*protected String[] getKeyboardWords()   {
         try {
             String theInput = "";
@@ -133,16 +183,40 @@ public abstract class KeyboardLevel extends Activity {
 
         catch (Exception e) { e.printStackTrace(); return new String[]{e.toString()}; }
     }*/
-
-    protected void log(final int num)   {
+    protected void log(final int num) {
         log(String.valueOf(num));
     }
 
-    protected void log(final String message)    {
+    protected void log(final String message) {
         Log.e("com.ryan.keyboardscrambler", message);
     }
 
-    protected void makeToast(final String message)  {
+    protected void makeToast(final String message) {
         Toast.makeText(theC, message, Toast.LENGTH_LONG).show();
+    }
+
+    private class UpdateTimeTV implements Runnable {
+
+        private TextView timeView;
+
+        public UpdateTimeTV(final TextView timeView) {
+            this.timeView = timeView;
+        }
+
+        @Override
+        public void run() {
+            elapsed = System.currentTimeMillis() - startTime;
+
+            secs = (int) (elapsed / 1000);
+            minutes = secs / 60;
+            seconds = secs % 60;
+            milliseconds = (int) (elapsed % 1000);
+
+            String.format("%03d", secs);
+            timeView.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secs) + ":" +
+                    String.format("%03d", milliseconds));
+
+            theHandler.postDelayed(this, 0);
+        }
     }
 }

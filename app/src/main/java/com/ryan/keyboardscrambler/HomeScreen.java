@@ -1,18 +1,16 @@
 package com.ryan.keyboardscrambler;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.widget.TextView;
 import android.view.MenuItem;
 import android.view.View;
-import android.content.Intent;
-import android.app.Activity;
+import android.widget.TextView;
 
 public class HomeScreen extends Activity {
 
     private TextView startTV;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
