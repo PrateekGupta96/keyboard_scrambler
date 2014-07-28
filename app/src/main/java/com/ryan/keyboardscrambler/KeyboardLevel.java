@@ -34,7 +34,6 @@ public abstract class KeyboardLevel extends Activity {
 
     protected byte NUM_WORDS = 5;
     protected byte onWord; //Word user is on
-    protected short totalNumChars;
 
     private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;
@@ -43,6 +42,7 @@ public abstract class KeyboardLevel extends Activity {
     protected TextView timeTV;
     protected String[] theWords;
     protected int width, height, adjustedHeight;
+    protected short totalNumChars;
     protected long startTime, elapsed;
     protected boolean hasStarted = false;
     private UpdateTimeTV theUpdater;
@@ -70,6 +70,11 @@ public abstract class KeyboardLevel extends Activity {
         return theResult;
     }
 
+    protected int getScore() {
+        double secPerChar = secs / totalNumChars;
+        return 1000 - (int) (secPerChar * 10);
+    }
+
     protected void setUpTimer(final TextView theTimeTV) {
         theUpdater = new UpdateTimeTV(theTimeTV);
     }
@@ -81,18 +86,6 @@ public abstract class KeyboardLevel extends Activity {
 
     protected void stopTimer() {
         theHandler.removeCallbacks(theUpdater);
-    }
-
-    protected long getElapsedMilliseconds() {
-        return elapsed;
-    }
-
-    protected long getElapsedSeconds() {
-        return secs;
-    }
-
-    protected int getElapsedMinutes() {
-        return minutes;
     }
 
     protected String getElapsed() {
@@ -153,10 +146,6 @@ public abstract class KeyboardLevel extends Activity {
         return theV;
     }
 
-    public void setWordChoice(final String[] theWords) {
-        this.theWords = theWords;
-    }
-
     protected abstract void userFinished();
 
     /** Returns random word */
@@ -168,43 +157,7 @@ public abstract class KeyboardLevel extends Activity {
         return theWord;
     }
 
-    /**
-     * Returns array of stored words
-     */
-    /*protected String[] getKeyboardWords()   {
-        try {
-            String theInput = "";
-
-            InputStreamReader theISR =
-                    new InputStreamReader(theC.getResources().openRawResource(R.raw.keyboard_scrambler_words));
-            BufferedReader theReader = new BufferedReader(theISR);
-
-            while(theReader.ready())
-                theInput += " " + theReader.readLine();
-
-            return theInput.split(" ");
-        }
-
-        catch (Exception e) { e.printStackTrace(); return new String[]{e.toString()}; }
-    }*/
-    protected void log(final int num) {
-        log(String.valueOf(num));
-    }
-
-    protected void log(final String message) {
-        Log.e("com.ryan.keyboardscrambler", message);
-    }
-
-    protected void makeToast(final String message) {
-        Toast.makeText(theC, message, Toast.LENGTH_LONG).show();
-    }
-
-    protected String[] getWords() {
-        return this.theWords;
-    }
-
     private class UpdateTimeTV implements Runnable {
-
         private TextView timeView;
 
         public UpdateTimeTV(final TextView timeView) {
@@ -226,5 +179,37 @@ public abstract class KeyboardLevel extends Activity {
 
             theHandler.postDelayed(this, 0);
         }
+    }
+
+    protected long getElapsedMilliseconds() {
+        return elapsed;
+    }
+
+    protected long getElapsedSeconds() {
+        return secs;
+    }
+
+    protected int getElapsedMinutes() {
+        return minutes;
+    }
+
+    protected void log(final String message) {
+        Log.e("com.ryan.keyboardscrambler", message);
+    }
+
+    protected void log(final int num) {
+        log(String.valueOf(num));
+    }
+
+    protected void makeToast(final String message) {
+        Toast.makeText(theC, message, Toast.LENGTH_LONG).show();
+    }
+
+    protected String[] getWords() {
+        return this.theWords;
+    }
+
+    public void setWordChoice(final String[] theWords) {
+        this.theWords = theWords;
     }
 }

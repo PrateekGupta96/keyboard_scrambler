@@ -14,7 +14,6 @@ public class HardLevel extends Medium_Level {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
         setContentView(R.layout.hard_level);
-        getActionBar().setTitle("Keyboard Scrambler Level Hard");
 
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
@@ -65,14 +64,13 @@ public class HardLevel extends Medium_Level {
         }
 
         int more = NUM_WORDS - onWord;
-
+        userResponse.setText("");
         refresh.setText(getHardLevelWord());
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
-
 
     private String getHardLevelWord() {
         String theWord = getRandomWord() + " " + getRandomWord() + " " + getRandomWord();

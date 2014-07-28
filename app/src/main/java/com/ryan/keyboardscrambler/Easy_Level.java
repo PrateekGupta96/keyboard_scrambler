@@ -19,8 +19,6 @@ public class Easy_Level extends KeyboardLevel {
 
         setContentView(R.layout.medium_level);
 
-        getActionBar().setTitle("Keyboard Scrambler Level Easy");
-
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
         secondRow = (LinearLayout) findViewById(R.id.secondRow);
@@ -73,6 +71,7 @@ public class Easy_Level extends KeyboardLevel {
         int more = NUM_WORDS - onWord;
 
         refresh.setText(getEasyLevel());
+        userResponse.setText("");
         if(more == 1)
             makeToast(more + " more word!");
         else

@@ -12,29 +12,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start"
+        android:textSize="30dp"
         android:gravity="center_horizontal"
         android:id="@+id/startTV"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp"/>
+        android:layout_marginTop="100dp"
+        android:textColor="#ff0099cc"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="How to Play"
-        android:id="@+id/textView4" android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:id="@+id/howToPlayTV"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/startTV"
+        android:gravity="center_horizontal"
+        android:textColor="#ff0099cc"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TV2"
-        android:id="@+id/textView2" android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" android:layout_marginBottom="73dp"/>
+        android:text="Scores"
+        android:id="@+id/scoresTV"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/howToPlayTV"
+        android:gravity="center_horizontal"
+        android:textColor="#ff0099cc"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3" android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true" android:layout_marginBottom="60dp"/>
+        android:text="Rate on Play Store"
+        android:id="@+id/rateTV"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/scoresTV"
+        android:gravity="center_horizontal"
+        android:textColor="#ff0099cc"/>
 </RelativeLayout>

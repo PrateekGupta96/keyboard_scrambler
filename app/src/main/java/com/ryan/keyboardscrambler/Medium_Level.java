@@ -17,8 +17,6 @@ public class Medium_Level extends KeyboardLevel {
 
         setContentView(R.layout.medium_level);
 
-        getActionBar().setTitle("Keyboard Scrambler Level Medium");
-
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
         secondRow = (LinearLayout) findViewById(R.id.secondRow);
@@ -64,13 +62,14 @@ public class Medium_Level extends KeyboardLevel {
         onWord++;
         if(onWord > 5) {
             stopTimer();
-            makeToast("You finished! " + getElapsed());
+            makeToast("You finished! " + getElapsed() + " Score: " + getScore());
             startActivity(new Intent(theC, HardLevel.class));
             return;
         }
 
         int more = NUM_WORDS - onWord;
 
+        userResponse.setText("");
         refresh.setText(getMediumLevel());
         if(more == 1)
             makeToast(more + " more word!");
