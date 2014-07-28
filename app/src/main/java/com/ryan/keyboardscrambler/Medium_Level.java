@@ -62,9 +62,21 @@ public class Medium_Level extends KeyboardLevel {
     }
 
     protected void userFinished() {
-        stopTimer();
-        makeToast("You finished! " + getElapsed());
-        startActivity(new Intent(theC, HardLevel.class));
+        onWord++;
+        if(onWord > 5) {
+            stopTimer();
+            makeToast("You finished! " + getElapsed());
+            startActivity(new Intent(theC, HardLevel.class));
+            return;
+        }
+
+        int more = NUM_WORDS - onWord;
+
+        refresh.setText(getMediumLevel(getRandomWord()));
+        if(more == 1)
+            makeToast(more + " more word!");
+        else
+            makeToast(more + " more words!");
     }
 
     private String getMediumLevel(final String theWord)

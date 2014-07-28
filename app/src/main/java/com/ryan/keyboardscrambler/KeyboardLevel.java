@@ -31,6 +31,10 @@ public abstract class KeyboardLevel extends Activity {
     protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected final Context theC = this;
+
+    protected int NUM_WORDS = 5;
+    protected int onWord; //Word user is on
+
     private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;
     protected TextView userResponse;
@@ -48,7 +52,7 @@ public abstract class KeyboardLevel extends Activity {
      */
     protected static String scrambleString(final String theString) {
         List<Character> theChars = new ArrayList<Character>(theString.length());
-        for (int i = 0; i < theString.length(); i++)
+        for (short i = 0; i < theString.length(); i++)
             theChars.add(theString.charAt(i));
 
         String theResult = "";

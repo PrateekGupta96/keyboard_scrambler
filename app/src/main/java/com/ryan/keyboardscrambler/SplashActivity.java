@@ -45,10 +45,10 @@ public class SplashActivity extends Activity {
         new LoadWords().execute();
     }
 
-    private class LoadWords extends AsyncTask<Void, Integer, ArrayList<String>> {
+    private class LoadWords extends AsyncTask<Void, Integer, String[]> {
 
         @Override
-        protected ArrayList<String> doInBackground(Void... params)  {
+        protected String[] doInBackground(Void... params)  {
             InputStreamReader theISR = null;
             BufferedReader theReader = null;
 
@@ -66,12 +66,13 @@ public class SplashActivity extends Activity {
                     publishProgress(counter);
                     counter++;
                 }
-
-                return new ArrayList<String>(Arrays.asList(theInput.toString().split(" ")));
+                return theInput.toString().split(" ");
+                //return new ArrayList<String>(Arrays.asList(theInput.toString().split(" ")));
             }
             catch (Exception e) {
                 e.printStackTrace();
-                return new ArrayList<String>(Arrays.asList(new String[]{e.toString()}));
+                return new String[]{e.toString()};
+                //return new ArrayList<String>(Arrays.asList(new String[]{e.toString()}));
             }
 
             finally {
@@ -91,14 +92,24 @@ public class SplashActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(final ArrayList<String> words) {
-
+        protected void onPostExecute(final String[] words) {
             final long st = System.currentTimeMillis();
-
+            final boolean[] wordsChosen = new boolean[words.length];
             final String[] theWords = new String[SIZE];
 
-            for(int i = 0; i < SIZE; i++)
-                theWords[i] = words.remove(theRandom.nextInt(words.size()));
+            for(int i = 0; i < SIZE; i++) {
+                int randomNum = theRandom.nextInt(words.length);
+
+                //If word has not been chosen yet
+                if(!wordsChosen[i]) {
+                    theWords[i] = words[i];
+                    wordsChosen[i] = true;
+                }
+                //If word has been chosen, decrement i (like starting over)
+                else {
+                    i--;
+                }
+            }
 
             final Intent toHomeScreen = new Intent(SplashActivity.this, HomeScreen.class);
             toHomeScreen.putExtra("words", theWords);
