@@ -34,6 +34,7 @@ public abstract class KeyboardLevel extends Activity {
 
     protected byte NUM_WORDS = 5;
     protected byte onWord; //Word user is on
+    protected short totalNumChars;
 
     private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;

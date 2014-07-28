@@ -7,5 +7,6 @@
     <string name="title_activity_hard_level">HardLevel</string>
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_easy__level">Easy_Level</string>
 
 </resources>

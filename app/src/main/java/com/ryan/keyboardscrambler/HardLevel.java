@@ -28,16 +28,17 @@ public class HardLevel extends Medium_Level {
 
         //Scrambled version of the str
         final String reArranged = scrambleString(theStr);
-        int counter = 0;
+        short counter = 0;
 
+        byte i;
         //Add the keys to the screen
-        for(int i = 0; i < 10; i++, counter++)
+        for(i = 0; i < 10; i++, counter++)
             firstRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(int i = 0; i < 9; i++, counter++)
+        for(i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(int i = 0; i < 9; i++, counter++)
+        for(i = 0; i < 9; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(int i = 0; i < 10; i++, counter++)
+        for(i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
         //Refresh button --> DEV PURPOSES

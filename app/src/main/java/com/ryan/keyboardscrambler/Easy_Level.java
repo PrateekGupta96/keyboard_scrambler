@@ -8,12 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View;
 
-public class Medium_Level extends KeyboardLevel {
+public class Easy_Level extends KeyboardLevel {
+
+    private static final String theStr = "abcdefghijklmnopqrstuvwxyz " + DELETE_CHAR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-
         super.setWordChoice(getIntent().getExtras().getStringArray("words"));
 
         setContentView(R.layout.medium_level);
@@ -22,7 +23,6 @@ public class Medium_Level extends KeyboardLevel {
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
         secondRow = (LinearLayout) findViewById(R.id.secondRow);
         thirdRow = (LinearLayout) findViewById(R.id.thirdRow);
-        fourthRow = (LinearLayout) findViewById(R.id.fourthRow);
 
         //Shows characters user pressed
         userResponse = (TextView) findViewById(R.id.userResponseTV);
@@ -35,7 +35,7 @@ public class Medium_Level extends KeyboardLevel {
         setDimensions();
 
         //Scrambled version of the str
-        final String reArranged = scrambleString(theStr);
+        final String reArranged = scrambleString(this.theStr);
         int counter = 0;
 
         //Add the keys to the screen
@@ -44,14 +44,12 @@ public class Medium_Level extends KeyboardLevel {
         for(byte i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
         for(byte i = 0; i < 9; i++, counter++)
-            thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(byte i = 0; i < 10; i++, counter++)
-            fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
+            thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
 
-        refresh.setText(getMediumLevel(getRandomWord()));
+        refresh.setText(getEasyLevel(getRandomWord()));
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,24 +71,15 @@ public class Medium_Level extends KeyboardLevel {
 
         int more = NUM_WORDS - onWord;
 
-        refresh.setText(getMediumLevel(getRandomWord()));
+        refresh.setText(getEasyLevel(getRandomWord()));
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
 
-    private String getMediumLevel(final String theWord) {
-        final String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
-
-        switch (theGenerator.nextInt(1)) {
-            case 0:
-                return theNum + " " + theWord;
-            case 1:
-                return theWord + " " + theNum;
-            default:
-                return theWord;
-        }
+    private String getEasyLevel(final String theWord) {
+        return theWord;
     }
 
     @Override
