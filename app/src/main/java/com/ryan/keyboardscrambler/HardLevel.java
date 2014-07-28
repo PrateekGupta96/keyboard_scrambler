@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.Intent;
 import android.view.View;
+import android.graphics.Color;
 
 public class HardLevel extends Medium_Level {
 
@@ -44,6 +45,7 @@ public class HardLevel extends Medium_Level {
         refresh = (TextView) findViewById(R.id.refresh);
 
         refresh.setText(getHardLevelWord());
+        refresh.setTextColor(Color.parseColor("#ff0099cc"));
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override

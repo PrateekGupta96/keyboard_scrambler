@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -162,6 +163,7 @@ public abstract class KeyboardLevel extends Activity {
 
         public UpdateTimeTV(final TextView timeView) {
             this.timeView = timeView;
+            this.timeView.setTextColor(Color.parseColor("#ffcc0000"));
         }
 
         @Override

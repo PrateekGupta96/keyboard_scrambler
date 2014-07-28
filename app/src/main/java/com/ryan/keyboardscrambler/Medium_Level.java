@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Color;
 import android.view.View;
 
 public class Medium_Level extends KeyboardLevel {
@@ -13,7 +14,6 @@ public class Medium_Level extends KeyboardLevel {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
-        //super.setWordChoice(getIntent().getExtras().getStringArray("words"));
 
         setContentView(R.layout.medium_level);
 
@@ -48,6 +48,7 @@ public class Medium_Level extends KeyboardLevel {
         refresh = (TextView) findViewById(R.id.refresh);
 
         refresh.setText(getMediumLevel());
+        refresh.setTextColor(Color.parseColor("#ff0099cc"));
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override

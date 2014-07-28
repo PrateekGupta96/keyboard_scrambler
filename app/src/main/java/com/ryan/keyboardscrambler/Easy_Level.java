@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.view.View;
+import android.graphics.Color;
 
 public class Easy_Level extends KeyboardLevel {
 
@@ -15,7 +16,6 @@ public class Easy_Level extends KeyboardLevel {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
-        //super.setWordChoice(getIntent().getExtras().getStringArray("words"));
 
         setContentView(R.layout.medium_level);
 
@@ -30,7 +30,6 @@ public class Easy_Level extends KeyboardLevel {
 
         timeTV = (TextView) findViewById(R.id.timeTV);
         setUpTimer(timeTV);
-
 
         //Scrambled version of the str
         final String reArranged = scrambleString(this.theStr);
@@ -48,6 +47,7 @@ public class Easy_Level extends KeyboardLevel {
         refresh = (TextView) findViewById(R.id.refresh);
 
         refresh.setText(getEasyLevel());
+        refresh.setTextColor(Color.parseColor("#ff0099cc"));
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
