@@ -48,6 +48,12 @@ public abstract class KeyboardLevel extends Activity {
     private UpdateTimeTV theUpdater;
     private int secs, minutes, seconds, milliseconds;
 
+    protected void onCreate(Bundle savedInstanceState, String[] theWords) {
+        super.onCreate(savedInstanceState);
+        this.theWords = theWords;
+        setDimensions();
+    }
+
     /**
      * Returns a scrambled version of a string
      */
@@ -62,11 +68,6 @@ public abstract class KeyboardLevel extends Activity {
             theResult += theChars.remove((int) (Math.random() * theChars.size()));
 
         return theResult;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     protected void setUpTimer(final TextView theTimeTV) {
@@ -99,7 +100,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     /** Intializes dimension variables */
-    protected void setDimensions()  {
+    private void setDimensions()  {
         final Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -196,6 +197,10 @@ public abstract class KeyboardLevel extends Activity {
 
     protected void makeToast(final String message) {
         Toast.makeText(theC, message, Toast.LENGTH_LONG).show();
+    }
+
+    protected String[] getWords() {
+        return this.theWords;
     }
 
     private class UpdateTimeTV implements Runnable {

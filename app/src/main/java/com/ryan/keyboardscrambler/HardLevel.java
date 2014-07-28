@@ -12,8 +12,9 @@ public class HardLevel extends Medium_Level {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
         setContentView(R.layout.hard_level);
+        getActionBar().setTitle("Keyboard Scrambler Level Hard");
 
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
@@ -24,9 +25,6 @@ public class HardLevel extends Medium_Level {
         //Shows characters user pressed
         userResponse = (TextView) findViewById(R.id.userResponseTV);
         userResponse.setCursorVisible(true);
-
-        //Initializes dimension variables
-        setDimensions();
 
         //Scrambled version of the str
         final String reArranged = scrambleString(theStr);

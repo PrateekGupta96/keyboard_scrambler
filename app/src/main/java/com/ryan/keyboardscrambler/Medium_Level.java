@@ -12,11 +12,12 @@ public class Medium_Level extends KeyboardLevel {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
-        super.onCreate(savedInstanceState);
-
-        super.setWordChoice(getIntent().getExtras().getStringArray("words"));
+        super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
+        //super.setWordChoice(getIntent().getExtras().getStringArray("words"));
 
         setContentView(R.layout.medium_level);
+
+        getActionBar().setTitle("Keyboard Scrambler Level Medium");
 
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
@@ -30,9 +31,6 @@ public class Medium_Level extends KeyboardLevel {
 
         timeTV = (TextView) findViewById(R.id.timeTV);
         setUpTimer(timeTV);
-
-        //Initializes dimension variables
-        setDimensions();
 
         //Scrambled version of the str
         final String reArranged = scrambleString(theStr);
