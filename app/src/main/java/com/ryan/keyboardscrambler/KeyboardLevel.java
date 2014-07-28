@@ -32,8 +32,8 @@ public abstract class KeyboardLevel extends Activity {
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected final Context theC = this;
 
-    protected int NUM_WORDS = 5;
-    protected int onWord; //Word user is on
+    protected byte NUM_WORDS = 5;
+    protected byte onWord; //Word user is on
 
     private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;
@@ -96,8 +96,6 @@ public abstract class KeyboardLevel extends Activity {
     protected String getElapsed() {
         return "Min: " + minutes + " Secs: " + seconds + " MS: " + milliseconds;
     }
-
-    ;
 
     /** Intializes dimension variables */
     protected void setDimensions()  {

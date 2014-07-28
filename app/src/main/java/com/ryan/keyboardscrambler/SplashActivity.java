@@ -27,11 +27,11 @@ public class SplashActivity extends Activity {
     private static final String fileName = "keyboard_scrambler_words.txt";
     private static final Random theRandom = new Random();
 
-    private final int WORDS = 2185;
-    private final int SIZE = 150;
+    private final short WORDS = 2185;
+    private final short SIZE = 150;
 
     private long startTime;
-    private final int MIN = 2; //Seconds
+    private final short MIN = 2; //Seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,16 +94,17 @@ public class SplashActivity extends Activity {
         @Override
         protected void onPostExecute(final String[] words) {
             final long st = System.currentTimeMillis();
+
             final boolean[] wordsChosen = new boolean[words.length];
             final String[] theWords = new String[SIZE];
 
-            for(int i = 0; i < SIZE; i++) {
-                int randomNum = theRandom.nextInt(words.length);
+            for(short i = 0; i < SIZE; i++) {
+                short randomNum = (short) theRandom.nextInt(words.length);
 
                 //If word has not been chosen yet
-                if(!wordsChosen[i]) {
-                    theWords[i] = words[i];
-                    wordsChosen[i] = true;
+                if(!wordsChosen[randomNum]) {
+                    theWords[i] = words[randomNum];
+                    wordsChosen[randomNum] = true;
                 }
                 //If word has been chosen, decrement i (like starting over)
                 else {

@@ -39,13 +39,13 @@ public class Medium_Level extends KeyboardLevel {
         int counter = 0;
 
         //Add the keys to the screen
-        for(int i = 0; i < 10; i++, counter++)
+        for(byte i = 0; i < 10; i++, counter++)
             firstRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(int i = 0; i < 9; i++, counter++)
+        for(byte i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(int i = 0; i < 9; i++, counter++)
+        for(byte i = 0; i < 9; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(int i = 0; i < 10; i++, counter++)
+        for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
         //Refresh button --> DEV PURPOSES
@@ -79,12 +79,10 @@ public class Medium_Level extends KeyboardLevel {
             makeToast(more + " more words!");
     }
 
-    private String getMediumLevel(final String theWord)
-    {
+    private String getMediumLevel(final String theWord) {
         final String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
 
-        switch (theGenerator.nextInt(1))
-        {
+        switch (theGenerator.nextInt(1)) {
             case 0:
                 return theNum + " " + theWord;
             case 1:
