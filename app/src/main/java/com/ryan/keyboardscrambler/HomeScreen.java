@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+//TODO: Look up how to make menu float in or look like it's floating
+
 public class HomeScreen extends Activity {
 
     private TextView startTV;

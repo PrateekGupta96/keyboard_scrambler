@@ -176,7 +176,7 @@ public abstract class KeyboardLevel extends Activity {
             milliseconds = (int) (elapsed % 1000);
 
             String.format("%03d", secs);
-            timeView.setText(String.format("%02d", minutes) + ":" + String.format("%02d", secs) + ":" +
+            timeView.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds) + ":" +
                     String.format("%03d", milliseconds));
 
             theHandler.postDelayed(this, 0);

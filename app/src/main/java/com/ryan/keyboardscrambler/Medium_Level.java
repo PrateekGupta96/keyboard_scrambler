@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.graphics.Color;
 import android.view.View;
 
+//TODO: Make first char of user text appear under first char of word
 public class Medium_Level extends KeyboardLevel {
 
     @Override
