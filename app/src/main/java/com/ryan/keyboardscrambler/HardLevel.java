@@ -26,27 +26,27 @@ public class HardLevel extends Medium_Level {
         userResponse = (TextView) findViewById(R.id.userResponseTV);
         userResponse.setCursorVisible(true);
 
+        timeTV = (TextView) findViewById(R.id.timeTV);
+        setUpTimer(timeTV);
+
         //Scrambled version of the str
         final String reArranged = scrambleString(theStr);
-        short counter = 0;
-
-        byte i;
+        int counter = 0;
         //Add the keys to the screen
-        for(i = 0; i < 10; i++, counter++)
+        for(byte i = 0; i < 10; i++, counter++)
             firstRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(i = 0; i < 9; i++, counter++)
+        for(byte i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(i = 0; i < 9; i++, counter++)
+        for(byte i = 0; i < 9; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(i = 0; i < 10; i++, counter++)
+        for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
 
-        refresh.setText(getHardLevelWord());
+        refresh.setText(getHardLevel());
         refresh.setTextColor(Color.parseColor("#ff0099cc"));
-
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,14 +67,14 @@ public class HardLevel extends Medium_Level {
 
         int more = NUM_WORDS - onWord;
         userResponse.setText("");
-        refresh.setText(getHardLevelWord());
+        refresh.setText(getHardLevel());
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
 
-    private String getHardLevelWord() {
+    private String getHardLevel() {
         String theWord = getRandomWord() + " " + getRandomWord() + " " + getRandomWord();
         String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
 
