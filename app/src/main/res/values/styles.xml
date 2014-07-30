@@ -1,8 +1,25 @@
 <resources>
-
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:popupMenuStyle">@style/MyDropDownStyle</item>
     </style>
-
+    <style name="PopupItemStyle">
+        <item name="android:background">#FFA0A0A0</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Holo.light.dark" parent="@android:style/Theme.Holo.Light">
+    <item name="android:actionBarStyle">@style/MyActionBarDark</item>
+    <item name="android:actionDropDownStyle">@style/MyDropDownStyle</item>
+    <item name="android:popupMenuStyle">@style/MyPopupMenuStyle</item> </style>
+    <style name="MyActionBarDark" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Light.Base.SearchResult.Title</item>
+        <item name="android:subtitleTextStyle">@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle</item>
+    </style>
+    <style name="MyDropDownStyle" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+    </style>
+    <style name="MyPopupMenuStyle" parent="@android:style/Widget.Holo.Light.PopupMenu">
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+    </style>
 </resources>

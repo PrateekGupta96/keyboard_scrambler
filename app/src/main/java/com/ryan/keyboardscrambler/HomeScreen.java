@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.view.View;
+import android.content.Context;
+import android.view.ContextThemeWrapper;
 import android.view.MenuInflater;
 import android.widget.TextView;
 import android.view.View.OnCreateContextMenuListener;
@@ -29,10 +31,9 @@ public class HomeScreen extends Activity {
 
         theWords = getIntent().getExtras().getStringArray("words");
         startTV = (TextView) findViewById(R.id.startTV);
-        thePopup = new PopupMenu(getApplicationContext(), startTV);
+        thePopup = new PopupMenu(HomeScreen.this, startTV);
         thePopup.getMenuInflater().inflate(R.menu.choose_level, thePopup.getMenu());
         thePopup.setOnMenuItemClickListener(new PopupMenuListenerChooseLevel());
-
 
         startTV.setOnClickListener(new View.OnClickListener() {
             @Override
