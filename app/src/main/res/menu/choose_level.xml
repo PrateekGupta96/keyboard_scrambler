@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/easyLevelItem"
+        android:title="Easy" />
+    <item
+        android:id="@+id/mediumLevelItem"
+        android:title="Medium" />
+    <item
+        android:id="@+id/hardLevelItem"
+        android:title="Pro" />
+</menu>
