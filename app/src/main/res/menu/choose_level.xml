@@ -3,7 +3,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/easyLevelItem"
-        android:title="Easy" />
+        android:title="Easy"
+        android:gravity="right"/>
     <item
         android:id="@+id/mediumLevelItem"
         android:title="Medium" />
