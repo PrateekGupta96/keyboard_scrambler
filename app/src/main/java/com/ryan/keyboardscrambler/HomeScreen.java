@@ -31,7 +31,9 @@ public class HomeScreen extends Activity {
 
         theWords = getIntent().getExtras().getStringArray("words");
         startTV = (TextView) findViewById(R.id.startTV);
-        thePopup = new PopupMenu(HomeScreen.this, startTV);
+        //thePopup = new PopupMenu(HomeScreen.this, startTV);
+        thePopup = new PopupMenu(HomeScreen.this, findViewById(R.id.locationForChooseGameMenu));
+
         thePopup.getMenuInflater().inflate(R.menu.choose_level, thePopup.getMenu());
         thePopup.setOnMenuItemClickListener(new PopupMenuListenerChooseLevel());
 

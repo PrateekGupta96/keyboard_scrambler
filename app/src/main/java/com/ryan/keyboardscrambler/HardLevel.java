@@ -93,7 +93,7 @@ public class HardLevel extends Medium_Level {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.hard_lavel, menu);
+        getMenuInflater().inflate(R.menu.hard_level, menu);
         return true;
     }
 
