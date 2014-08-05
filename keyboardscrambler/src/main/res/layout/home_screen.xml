@@ -9,61 +9,40 @@
     tools:context="com.ryan.keyboardscrambler.HomeScreen">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/locationForChooseGameMenu"
+        style="@style/HomeScreenTVStyle"
         android:gravity="right"
         android:layout_marginTop="80dp"
         android:layout_alignParentRight="true"
-        android:textColor="#ff0099cc"
         android:textSize="30dp"
-        android:text=""/>
+        android:text=""
+        android:id="@+id/locationForChooseGameMenu"
+        android:textColor="#ff0099cc" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Start"
-        android:textSize="30dp"
-        android:gravity="center_horizontal"
-        android:id="@+id/startTV"
-        android:layout_alignParentTop="true"
+        style="@style/HomeScreenTVStyle"
         android:layout_marginTop="100dp"
-        android:textColor="#ff0099cc"/>
+        android:text="Start"
+        android:id="@+id/startTV"
+        android:layout_alignParentTop="true"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        style="@style/HomeScreenTVStyle"
+        android:layout_marginTop="40dp"
         android:text="How to Play"
         android:id="@+id/howToPlayTV"
-        android:textSize="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/startTV"
-        android:gravity="center_horizontal"
-        android:textColor="#ff0099cc"/>
+        android:layout_below="@+id/startTV" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        style="@style/HomeScreenTVStyle"
+        android:layout_marginTop="40dp"
         android:text="Scores"
         android:id="@+id/scoresTV"
-        android:textSize="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/howToPlayTV"
-        android:gravity="center_horizontal"
-        android:textColor="#ff0099cc"/>
+        android:layout_below="@+id/howToPlayTV" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        style="@style/HomeScreenTVStyle"
+        android:layout_marginTop="40dp"
         android:text="Rate on Play Store"
         android:id="@+id/rateTV"
-        android:textSize="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/scoresTV"
-        android:gravity="center_horizontal"
-        android:textColor="#ff0099cc"/>
+        android:layout_below="@+id/scoresTV" />
 </RelativeLayout>
