@@ -1,15 +1,27 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:popupMenuStyle">@style/MyDropDownStyle</item>
         <item name="android:gravity">right</item>
         <item name="android:layout_gravity">right</item>
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+        <item name="textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
     </style>
+
     <style name="PopupItemStyle">
         <item name="android:background">#FFA0A0A0</item>
         <item name="android:gravity">right</item>
         <item name="android:layout_gravity">right</item>
         <item name="android:padding">10dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+        <item name="textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
     </style>
 
     <style name="Holo.light.dark" parent="@android:style/Theme.Holo.Light">
@@ -23,14 +35,32 @@
         <item name="android:layout_gravity">right</item>
         <item name="android:gravity">right</item>
     </style>
+
     <style name="MyDropDownStyle" parent="@android:style/Widget.Holo.Spinner">
         <item name="android:textColor">@android:color/holo_blue_bright</item>
         <item name="android:layout_gravity">right</item>
         <item name="android:gravity">right</item>
+        <item name="textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
     </style>
+
     <style name="MyPopupMenuStyle" parent="@android:style/Widget.Holo.Light.PopupMenu">
         <item name="android:textColor">@android:color/holo_blue_bright</item>
         <item name="android:layout_gravity">right</item>
         <item name="android:gravity">right</item>
+        <item name="textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/myPopupMenuTextAppearanceSmall</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceSmall" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+        <item name="android:textColor">@android:color/holo_blue_bright</item>
     </style>
 </resources>
