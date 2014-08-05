@@ -41,7 +41,7 @@ public class Easy_Level extends KeyboardLevel {
         for(byte i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
         for(byte i = 0; i < 9; i++, counter++)
-            thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
+            thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);

@@ -183,6 +183,12 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //gtheHandler.sendEmptyMessage()
+    }
+
     protected long getElapsedMilliseconds() {
         return elapsed;
     }

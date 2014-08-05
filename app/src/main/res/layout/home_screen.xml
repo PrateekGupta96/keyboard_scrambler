@@ -17,7 +17,7 @@
         android:layout_alignParentRight="true"
         android:textColor="#ff0099cc"
         android:textSize="30dp"
-        android:text="h"/>
+        android:text=""/>
 
     <TextView
         android:layout_width="wrap_content"
