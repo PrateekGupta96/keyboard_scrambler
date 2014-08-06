@@ -19,6 +19,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import android.content.SharedPreferences;
 
 /**
  * A level of the game
@@ -27,14 +28,19 @@ import java.util.Random;
 public abstract class KeyboardLevel extends Activity {
 
     protected static final String fileName = "keyboard_scrambler_words.txt";
-    protected static final Random theGenerator = new Random();
     protected static final String DELETE_CHAR = "<";
     protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
+
+    protected static final String TAG_EASY = "EASY_LEVEL_BEST";
+    protected static final String TAG_MEDIUM = "MEDIUM_LEVEL_BEST";
+    protected static final String TAG_DIFFICULT = "HARD_LEVEL_BEST";
+    protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
+
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
+    protected static final Random theGenerator = new Random();
+
     protected final Context theC = this;
-    protected static final String EASY_LEVEL = "EASY_LEVEL_BEST";
-    protected static final String MEDIUM_LEVEL = "MEDIUM_LEVEL_BEST";
-    protected static final String HARD_LEVEL = "HARD_LEVEL_BEST";
+    protected final SharedPreferences highScores = getSharedPreferences(TAG_HIGH_SCORE, 0);
 
     protected byte NUM_WORDS = 5;
     protected byte onWord; //Word user is on
@@ -186,6 +192,39 @@ public abstract class KeyboardLevel extends Activity {
             theHandler.postDelayed(this, 0);
         }
     }
+
+    public void setHighScore(final Level theLevel, final String theScore) {
+        final SharedPreferences.Editor newScore = highScores.edit();
+
+        switch(theLevel) {
+            case EASY:
+                newScore.putString(TAG_EASY, theScore);
+                break;
+            case MEDIUM:
+                newScore.putString(TAG_MEDIUM, theScore);
+                break;
+            case DIFFICULT:
+                newScore.putString(TAG_DIFFICULT, theScore);
+                break;
+            default:
+                break;
+        }
+        newScore.commit();
+    }
+
+    public String getHighScore(final Level theLevel) {
+        switch(theLevel) {
+            case EASY:
+                return highScores.getString(TAG_EASY, "0");
+            case MEDIUM:
+                return highScores.getString(TAG_MEDIUM, "0");
+            case DIFFICULT:
+                return highScores.getString(TAG_DIFFICULT, "0");
+            default:
+                return "0";
+        }
+    }
+
 
 
     @Override
