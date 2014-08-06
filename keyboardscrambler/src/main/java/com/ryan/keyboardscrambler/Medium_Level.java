@@ -1,13 +1,13 @@
 package com.ryan.keyboardscrambler;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.graphics.Color;
-import android.view.View;
 
 //TODO: Make first char of user text appear under first char of word
 public class Medium_Level extends KeyboardLevel {

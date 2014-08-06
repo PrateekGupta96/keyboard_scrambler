@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -56,6 +56,7 @@ public abstract class KeyboardLevel extends Activity {
         super.onCreate(savedInstanceState);
         this.theWords = theWords;
         setDimensions();
+        getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
     }
 
     /**

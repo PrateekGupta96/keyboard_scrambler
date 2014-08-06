@@ -2,19 +2,14 @@ package com.ryan.keyboardscrambler;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.view.View;
-import android.content.Context;
-import android.view.ContextThemeWrapper;
-import android.view.MenuInflater;
-import android.widget.TextView;
-import android.view.View.OnCreateContextMenuListener;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 
 //TODO: Look up how to make menu float in or look like it's floating
 
@@ -28,6 +23,7 @@ public class HomeScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+        getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         theWords = getIntent().getExtras().getStringArray("words");
         startTV = (TextView) findViewById(R.id.startTV);
