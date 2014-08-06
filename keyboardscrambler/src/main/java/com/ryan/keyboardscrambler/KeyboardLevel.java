@@ -32,6 +32,9 @@ public abstract class KeyboardLevel extends Activity {
     protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected final Context theC = this;
+    protected static final String EASY_LEVEL = "EASY_LEVEL_BEST";
+    protected static final String MEDIUM_LEVEL = "MEDIUM_LEVEL_BEST";
+    protected static final String HARD_LEVEL = "HARD_LEVEL_BEST";
 
     protected byte NUM_WORDS = 5;
     protected byte onWord; //Word user is on
@@ -151,7 +154,7 @@ public abstract class KeyboardLevel extends Activity {
 
     /** Returns random word */
     protected String getRandomWord() {
-        String theWord =  theWords[theGenerator.nextInt(theWords.length)].replace(" ", "");
+        final String theWord =  theWords[theGenerator.nextInt(theWords.length)].replace(" ", "");
 
         if(theWord.length() < 4)
             return getRandomWord();
@@ -183,6 +186,7 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -210,7 +214,9 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     protected void makeToast(final String message) {
-        Toast.makeText(theC, message, Toast.LENGTH_LONG).show();
+        final Toast theToast= Toast.makeText(theC, message, Toast.LENGTH_SHORT);
+        theToast.setGravity(android.view.Gravity.CENTER, 0, 0);
+        theToast.show();
     }
 
     protected String[] getWords() {
