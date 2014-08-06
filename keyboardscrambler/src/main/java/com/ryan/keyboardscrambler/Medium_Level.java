@@ -48,7 +48,7 @@ public class Medium_Level extends KeyboardLevel {
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
 
-        refresh.setText(getMediumLevel());
+        refresh.setText(getLevelWord());
         refresh.setTextColor(Color.parseColor("#ff0099cc"));
 
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -72,14 +72,14 @@ public class Medium_Level extends KeyboardLevel {
         int more = NUM_WORDS - onWord;
 
         userResponse.setText("");
-        refresh.setText(getMediumLevel());
+        refresh.setText(getLevelWord());
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
 
-    private String getMediumLevel() {
+    protected String getLevelWord() {
         final String theWord = super.getRandomWord();
         final String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
 

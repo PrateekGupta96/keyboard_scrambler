@@ -46,7 +46,7 @@ public class Easy_Level extends KeyboardLevel {
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
 
-        refresh.setText(getEasyLevel());
+        refresh.setText(getLevelWord());
         refresh.setTextColor(Color.parseColor("#ff0099cc"));
 
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class Easy_Level extends KeyboardLevel {
 
         int more = NUM_WORDS - onWord;
 
-        refresh.setText(getEasyLevel());
+        refresh.setText(getLevelWord());
         userResponse.setText("");
         if(more == 1)
             makeToast(more + " more word!");
@@ -78,7 +78,7 @@ public class Easy_Level extends KeyboardLevel {
             makeToast(more + " more words!");
     }
 
-    private String getEasyLevel() {
+    protected String getLevelWord() {
         return super.getRandomWord();
     }
 

@@ -32,6 +32,7 @@ public class HardLevel extends Medium_Level {
         //Scrambled version of the str
         final String reArranged = scrambleString(theStr);
         int counter = 0;
+
         //Add the keys to the screen
         for(byte i = 0; i < 10; i++, counter++)
             firstRow.addView(getCharTV(reArranged.charAt(counter), 10));
@@ -44,8 +45,7 @@ public class HardLevel extends Medium_Level {
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
-
-        refresh.setText(getHardLevel());
+        refresh.setText(getLevelWord());
         refresh.setTextColor(Color.parseColor("#ff0099cc"));
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,19 +67,18 @@ public class HardLevel extends Medium_Level {
 
         int more = NUM_WORDS - onWord;
         userResponse.setText("");
-        refresh.setText(getHardLevel());
+        refresh.setText(getLevelWord());
         if(more == 1)
             makeToast(more + " more word!");
         else
             makeToast(more + " more words!");
     }
 
-    private String getHardLevel() {
+    protected String getLevelWord() {
         String theWord = getRandomWord() + " " + getRandomWord() + " " + getRandomWord();
         String theNum = String.valueOf(theGenerator.nextInt(100) + 1);
 
-        switch (theGenerator.nextInt(1))
-        {
+        switch (theGenerator.nextInt(1)) {
             case 0:
                 return theNum + " " + theWord;
             case 1:

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import android.content.SharedPreferences;
-
+import android.content.SharedPreferences.Editor;
 /**
  * A level of the game
  */
@@ -39,8 +39,8 @@ public abstract class KeyboardLevel extends Activity {
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected static final Random theGenerator = new Random();
 
-    protected final Context theC = this;
-    protected final SharedPreferences highScores = getSharedPreferences(TAG_HIGH_SCORE, 0);
+    protected Context theC;
+    protected SharedPreferences highScores;
 
     protected byte NUM_WORDS = 5;
     protected byte onWord; //Word user is on
@@ -50,11 +50,13 @@ public abstract class KeyboardLevel extends Activity {
     protected TextView userResponse;
     protected TextView refresh;
     protected TextView timeTV;
+
     protected String[] theWords;
     protected int width, height, adjustedHeight;
     protected short totalNumChars;
     protected long startTime, elapsed;
     protected boolean hasStarted = false;
+
     private UpdateTimeTV theUpdater;
     private int secs, minutes, seconds, milliseconds;
 
@@ -63,6 +65,9 @@ public abstract class KeyboardLevel extends Activity {
         this.theWords = theWords;
         setDimensions();
         getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+
+        theC = getApplicationContext();
+        highScores = getApplicationContext().getSharedPreferences(TAG_HIGH_SCORE, 0);
     }
 
     /**
@@ -158,6 +163,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     protected abstract void userFinished();
+    protected abstract String getLevelWord();
 
     /** Returns random word */
     protected String getRandomWord() {
@@ -194,8 +200,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     public void setHighScore(final Level theLevel, final String theScore) {
-        final SharedPreferences.Editor newScore = highScores.edit();
-
+        final Editor newScore = highScores.edit();
         switch(theLevel) {
             case EASY:
                 newScore.putString(TAG_EASY, theScore);
