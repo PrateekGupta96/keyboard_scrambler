@@ -16,8 +16,9 @@ public class Easy_Level extends KeyboardLevel {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
-
         setContentView(R.layout.medium_level);
+
+        this.LEVEL = Level.EASY;
 
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
@@ -45,37 +46,14 @@ public class Easy_Level extends KeyboardLevel {
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
-
         refresh.setText(getLevelWord());
         refresh.setTextColor(Color.parseColor("#ff0099cc"));
-
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recreate();
             }
         });
-    }
-
-    protected void userFinished() {
-        totalNumChars += refresh.getText().toString().length();
-        onWord++;
-        if(onWord > 5) {
-            stopTimer();
-            makeToast("You finished! " + getElapsed());
-            final Intent toDifficult = new Intent(theC, HardLevel.class);
-            toDifficult.putExtra("words", super.getWords());
-            return;
-        }
-
-        int more = NUM_WORDS - onWord;
-
-        refresh.setText(getLevelWord());
-        userResponse.setText("");
-        if(more == 1)
-            makeToast(more + " more word!");
-        else
-            makeToast(more + " more words!");
     }
 
     protected String getLevelWord() {

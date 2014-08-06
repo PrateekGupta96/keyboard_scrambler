@@ -41,9 +41,10 @@ public abstract class KeyboardLevel extends Activity {
 
     protected Context theC;
     protected SharedPreferences highScores;
+    protected Level LEVEL;
 
-    protected byte NUM_WORDS = 5;
-    protected byte onWord; //Word user is on
+    protected static final byte NUM_WORDS = 2; //SHOULD BE 5
+    protected byte onWord = 0; //Word user is on
 
     private final Handler theHandler = new Handler();
     protected LinearLayout firstRow, secondRow, thirdRow, fourthRow;
@@ -59,6 +60,9 @@ public abstract class KeyboardLevel extends Activity {
 
     private UpdateTimeTV theUpdater;
     private int secs, minutes, seconds, milliseconds;
+
+
+    protected abstract String getLevelWord();
 
     protected void onCreate(Bundle savedInstanceState, String[] theWords) {
         super.onCreate(savedInstanceState);
@@ -86,9 +90,20 @@ public abstract class KeyboardLevel extends Activity {
         return theResult;
     }
 
-    protected int getScore() {
-        double secPerChar = secs / totalNumChars;
-        return 1000 - (int) (secPerChar * 10);
+    protected int getScore(final Level theLevel) {
+        final double secPerChar = secs / totalNumChars;
+        final int scoreSoFar = 1000 - (int) (secPerChar * 10);
+
+        switch(theLevel) {
+            case EASY:
+                return scoreSoFar;
+            case MEDIUM:
+                return scoreSoFar + 150;
+            case DIFFICULT:
+                return scoreSoFar + 350;
+            default:
+                return scoreSoFar;
+        }
     }
 
     protected void setUpTimer(final TextView theTimeTV) {
@@ -162,9 +177,6 @@ public abstract class KeyboardLevel extends Activity {
         return theV;
     }
 
-    protected abstract void userFinished();
-    protected abstract String getLevelWord();
-
     /** Returns random word */
     protected String getRandomWord() {
         final String theWord =  theWords[theGenerator.nextInt(theWords.length)].replace(" ", "");
@@ -172,6 +184,31 @@ public abstract class KeyboardLevel extends Activity {
         if(theWord.length() < 4)
             return getRandomWord();
         return theWord;
+    }
+
+    protected void userFinished() {
+        totalNumChars += refresh.getText().toString().length();
+        onWord++;
+
+        if(onWord >= NUM_WORDS) {
+            stopTimer();
+            makeToast("You finished! " + getElapsed());
+
+            final int score = getScore(LEVEL);
+            if(Integer.parseInt(getHighScore(LEVEL)) < score){
+                setHighScore(LEVEL, score);
+            }
+            return;
+        }
+
+        int more = NUM_WORDS - onWord;
+
+        refresh.setText(getLevelWord());
+        userResponse.setText("");
+        if(more == 1)
+            makeToast("Last word!");
+        else
+            makeToast(more + " more words!");
     }
 
     private class UpdateTimeTV implements Runnable {
@@ -197,6 +234,10 @@ public abstract class KeyboardLevel extends Activity {
 
             theHandler.postDelayed(this, 0);
         }
+    }
+
+    public void setHighScore(final Level theLevel, final int theScore) {
+        setHighScore(theLevel, String.valueOf(theScore));
     }
 
     public void setHighScore(final Level theLevel, final String theScore) {
@@ -230,12 +271,16 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
-
-
     @Override
     public void onResume() {
+        //theHandler.postDelayed(theUpdater, 0);
         super.onResume();
-        //gtheHandler.sendEmptyMessage()
+    }
+
+    @Override
+    public void onPause() {
+        //theHandler.removeCallbacks(theUpdater);
+        super.onPause();
     }
 
     protected long getElapsedMilliseconds() {

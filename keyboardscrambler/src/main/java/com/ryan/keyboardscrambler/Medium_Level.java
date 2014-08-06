@@ -15,8 +15,9 @@ public class Medium_Level extends KeyboardLevel {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
-
         setContentView(R.layout.medium_level);
+
+        super.LEVEL = Level.MEDIUM;
 
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
@@ -57,26 +58,6 @@ public class Medium_Level extends KeyboardLevel {
                 recreate();
             }
         });
-    }
-
-    protected void userFinished() {
-        totalNumChars += refresh.getText().toString().length();
-        onWord++;
-        if(onWord > 5) {
-            stopTimer();
-            makeToast("You finished! " + getElapsed() + " Score: " + getScore());
-            startActivity(new Intent(theC, HardLevel.class));
-            return;
-        }
-
-        int more = NUM_WORDS - onWord;
-
-        userResponse.setText("");
-        refresh.setText(getLevelWord());
-        if(more == 1)
-            makeToast(more + " more word!");
-        else
-            makeToast(more + " more words!");
     }
 
     protected String getLevelWord() {

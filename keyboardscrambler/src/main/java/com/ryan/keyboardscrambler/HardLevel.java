@@ -16,6 +16,8 @@ public class HardLevel extends Medium_Level {
         super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
         setContentView(R.layout.hard_level);
 
+        super.LEVEL = Level.DIFFICULT;
+
         //Initialize the rows that will hold the character keys
         firstRow = (LinearLayout) findViewById(R.id.firstRow);
         secondRow = (LinearLayout) findViewById(R.id.secondRow);
@@ -53,25 +55,6 @@ public class HardLevel extends Medium_Level {
                 recreate();
             }
         });
-    }
-
-    protected void userFinished() {
-        totalNumChars += refresh.getText().toString().length();
-        onWord++;
-        if(onWord > 5) {
-            stopTimer();
-            makeToast("You finished! " + getElapsed());
-            startActivity(new Intent(theC, HardLevel.class));
-            return;
-        }
-
-        int more = NUM_WORDS - onWord;
-        userResponse.setText("");
-        refresh.setText(getLevelWord());
-        if(more == 1)
-            makeToast(more + " more word!");
-        else
-            makeToast(more + " more words!");
     }
 
     protected String getLevelWord() {
