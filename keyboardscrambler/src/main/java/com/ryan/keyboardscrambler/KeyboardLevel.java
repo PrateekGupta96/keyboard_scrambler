@@ -94,13 +94,12 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     protected double getLPS() {
-        log("Secs\t" + secs + "Chars\t" + totalNumChars);
-        return (double) (secs / totalNumChars);
+        return (((double)secs) / ((double)totalNumChars));
     }
 
     protected int getScore(final Level theLevel) {
-        final double secPerChar = secs / totalNumChars;
-        final int scoreSoFar = 1000 - (int) (secPerChar * 10);
+        final double secPerChar = getLPS();
+        final int scoreSoFar = 1000 - (int) (secPerChar * 50);
 
         switch(theLevel) {
             case EASY:
