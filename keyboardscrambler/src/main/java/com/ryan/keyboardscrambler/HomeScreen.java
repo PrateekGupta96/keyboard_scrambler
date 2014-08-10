@@ -109,12 +109,12 @@ public class HomeScreen extends Activity {
 
             final LinearLayout theTitles = getLayout();
 
-            theTitles.addView(getTV("", Gravity.LEFT));
+            theTitles.addView(getTV("         ", Gravity.LEFT));
             theTitles.addView(getTV("Score", Gravity.CENTER));
             theTitles.addView(getTV("LPS", Gravity.CENTER));
 
             final LinearLayout easy = getLayout();
-            easy.addView(getTV("Easy", Gravity.LEFT));
+            easy.addView(getTV("Easy      ", Gravity.LEFT));
             easy.addView(getTV(getValue(TAG_EASY_SCORE), Gravity.CENTER));
             easy.addView(getTV(getValue(TAG_EASY_LPS), Gravity.CENTER));
 
@@ -123,9 +123,8 @@ public class HomeScreen extends Activity {
             medium.addView(getTV(getValue(TAG_MEDIUM_SCORE), Gravity.CENTER));
             medium.addView(getTV(getValue(TAG_MEDIUM_LPS), Gravity.CENTER));
 
-
             final LinearLayout pro = getLayout();
-            pro.addView(getTV("Pro", Gravity.LEFT));
+            pro.addView(getTV("Pro       ", Gravity.LEFT));
             pro.addView(getTV(getValue(TAG_DIFFICULT_SCORE), Gravity.CENTER));
             pro.addView(getTV(getValue(TAG_DIFFICULT_LPS), Gravity.CENTER));
 
@@ -133,6 +132,10 @@ public class HomeScreen extends Activity {
             theLayout.addView(easy);
             theLayout.addView(medium);
             theLayout.addView(pro);
+
+            theLayout.addView(getAsterixTV("LPS = Letters per second"));
+            theLayout.addView(getAsterixTV("N/F = Not Finished"));
+            theLayout.addView(getLayout());
 
             highScores.setView(theLayout);
 
@@ -147,15 +150,23 @@ public class HomeScreen extends Activity {
         }
     };
 
+    private TextView getAsterixTV(final String message) {
+        final TextView theTV = new TextView(theC);
+        theTV.setText(message);
+        theTV.setTextSize(15);
+        theTV.setGravity(Gravity.CENTER);
+        theTV.setPadding(0, 80, 0, 0);
+        theTV.setTextColor(Color.parseColor("#ffff4444"));
+        return theTV;
+    }
+
     private LinearLayout getLayout() {
         final LinearLayout theLayout = new LinearLayout(theC);
         theLayout.setOrientation(LinearLayout.HORIZONTAL);
         theLayout.setWeightSum(1.0f);
-        theLayout.setPadding(10, 20, 0, 0);
+        theLayout.setPadding(15, 40, 0, 0);
         return theLayout;
     }
-
-
 
     private final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
             LayoutParams.WRAP_CONTENT, 0.33f);
@@ -229,7 +240,16 @@ public class HomeScreen extends Activity {
     }
 
     private String getValue(final String TAG) {
-        return highScores.getString(TAG, "N/F");
+        try {
+            return highScores.getString(TAG, "N/F");
+        }
+        catch(ClassCastException e) {
+            final int theScore = highScores.getInt(TAG, 0);
+            if (theScore == 0) {
+                return "N/F";
+            }
+            return String.valueOf(theScore);
+        }
     }
 
     public String getHighScore(final Level theLevel) {

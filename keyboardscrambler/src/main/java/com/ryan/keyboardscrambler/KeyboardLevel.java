@@ -94,7 +94,8 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     protected double getLPS() {
-        return secs / totalNumChars;
+        log("Secs\t" + secs + "Chars\t" + totalNumChars);
+        return (double) (secs / totalNumChars);
     }
 
     protected int getScore(final Level theLevel) {
@@ -204,6 +205,7 @@ public abstract class KeyboardLevel extends Activity {
             final int score = getScore(LEVEL);
             final double lps = getLPS();
             setHighScore(new LevelScore(LEVEL, lps, score));
+            log("Score\t" + score + "LPS:\t" + lps);
             return;
         }
 
