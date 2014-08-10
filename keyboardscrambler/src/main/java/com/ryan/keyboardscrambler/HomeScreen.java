@@ -15,6 +15,8 @@ import android.app.AlertDialog;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
+import android.content.ActivityNotFoundException;
 
 //TODO: Look up how to make menu float in or look like it's floating
 
@@ -90,7 +92,14 @@ public class HomeScreen extends Activity {
     private final OnClickListener rateListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            final Uri uri = Uri.parse("market://details?id=" + theC.getPackageName());
+            final Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" +
+                        theC.getPackageName())));
+            }
         }
     };
 
