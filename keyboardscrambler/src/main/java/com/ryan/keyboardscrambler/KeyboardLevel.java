@@ -31,9 +31,12 @@ public abstract class KeyboardLevel extends Activity {
     protected static final String DELETE_CHAR = "<";
     protected static final String theStr = "abcdefghijklmnopqrstuvwxyz 1234567890" + DELETE_CHAR;
 
-    protected static final String TAG_EASY = "EASY_LEVEL_BEST";
-    protected static final String TAG_MEDIUM = "MEDIUM_LEVEL_BEST";
-    protected static final String TAG_DIFFICULT = "HARD_LEVEL_BEST";
+    protected static final String TAG_EASY_SCORE = "EASY_LEVEL_BEST_SCORE";
+    protected static final String TAG_EASY_LPS = "EASY_LEVEL_BEST_LPS";
+    protected static final String TAG_MEDIUM_SCORE = "MEDIUM_LEVEL_BEST_SCORE";
+    protected static final String TAG_MEDIUM_LPS = "MEDIUM_LEVEL_LPS";
+    protected static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
+    protected static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
     protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
 
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
@@ -88,6 +91,10 @@ public abstract class KeyboardLevel extends Activity {
             theResult += theChars.remove((int) (Math.random() * theChars.size()));
 
         return theResult;
+    }
+
+    protected double getLPS() {
+        return secs / totalNumChars;
     }
 
     protected int getScore(final Level theLevel) {
@@ -195,9 +202,8 @@ public abstract class KeyboardLevel extends Activity {
             makeToast("You finished! " + getElapsed());
 
             final int score = getScore(LEVEL);
-            if(Integer.parseInt(getHighScore(LEVEL)) < score){
-                setHighScore(LEVEL, score);
-            }
+            final double lps = getLPS();
+            setHighScore(new LevelScore(LEVEL, lps, score));
             return;
         }
 
@@ -240,9 +246,9 @@ public abstract class KeyboardLevel extends Activity {
         setHighScore(theLevel, String.valueOf(theScore));
     }
 
-    public void setHighScore(final Level theLevel, final String theScore) {
+    public void setHighScore(final LevelScore theScore) {
         final Editor newScore = highScores.edit();
-        switch(theLevel) {
+        switch(theScore.getTheLevel()) {
             case EASY:
                 newScore.putString(TAG_EASY, theScore);
                 break;
@@ -258,16 +264,26 @@ public abstract class KeyboardLevel extends Activity {
         newScore.commit();
     }
 
-    public String getHighScore(final Level theLevel) {
+    private String getValue(final String TAG) {
+        return highScores.getString(TAG, "0");
+    }
+    private double getDouble(final String TAG) {
+        return Double.parseDouble(getValue(TAG));
+    }
+    private int getInt(final String TAG) {
+        return highScores.getInteger(TAG, 0);
+    }
+
+    public LevelScore getHighScore(final Level theLevel) {
         switch(theLevel) {
             case EASY:
-                return highScores.getString(TAG_EASY, "0");
+                return new LevelScore(theLevel, getDouble(TAG_EASY_LPS), getInt(TAG_EASY_SCORE));
             case MEDIUM:
-                return highScores.getString(TAG_MEDIUM, "0");
+                return new LevelScore(theLevel, getDouble(TAG_MEDIUM_LPS), getInt(TAG_MEDIUM_SCORE));
             case DIFFICULT:
-                return highScores.getString(TAG_DIFFICULT, "0");
+                return new LevelScore(theLevel, getDouble(TAG_DIFFICULT_LPS), getInt(TAG_DIFFICULT_SCORE));
             default:
-                return "0";
+                return new LevelScore(theLevel, 0, 0);
         }
     }
 
