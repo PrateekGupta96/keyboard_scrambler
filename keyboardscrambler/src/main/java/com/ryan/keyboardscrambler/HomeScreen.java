@@ -61,12 +61,19 @@ public class HomeScreen extends Activity {
         public void onClick(View v) {
             final AlertDialog.Builder instructions = new AlertDialog.Builder(HomeScreen.this);
 
+            final String howToPlay = "Click on 'Start' and choose a Level. " +
+                    "Once you've chosen a level, you'll see a '00:00:00' in red at the top " +
+                    "right of the screen and words in light blue below that. " +
+                    "You'll also see a 'keyboard' at the bottom of the screen. " +
+                    "\n\nThe point of the game is to try to type the words on the screen as quickly " +
+                    "as possible using the keyboard at the bottom of the screen.\n" +
+                    "The '<' character is for deleting the last letter typed.\n";
+
             instructions.setTitle("How to Play");
-            instructions.setMessage("LOL");
-            instructions.setPositiveButton("I understand", new DialogInterface.OnClickListener() {
+            instructions.setMessage(howToPlay);
+            instructions.setPositiveButton("Sounds like fun, let me try it!", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
                 }
             });
             instructions.show();
