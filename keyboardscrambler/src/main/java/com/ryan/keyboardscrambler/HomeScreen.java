@@ -99,9 +99,9 @@ public class HomeScreen extends Activity {
                     "Medium Level:\t" + getHighScore(Level.MEDIUM) + "\n\n" +
                     "Pro. Level:\t" + getHighScore(Level.DIFFICULT) + "\n";
 
-            highScores.setPositiveButton("Hmm. Let me try to improve", new android.content.DialogInterface.OnClickListener() {
+            highScores.setPositiveButton("Hmm. Let me try to improve", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(android.content.DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which) {
 
                 }
             });
