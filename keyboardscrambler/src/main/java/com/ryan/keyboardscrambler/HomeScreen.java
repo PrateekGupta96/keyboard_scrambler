@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.graphics.Color;
 import android.view.Menu;
+import android.widget.LinearLayout;
 import android.view.MenuItem;
+import android.view.ViewGroup.LayoutParams;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.app.AlertDialog;
+import android.util.Log;
 import android.content.SharedPreferences;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -96,14 +101,40 @@ public class HomeScreen extends Activity {
         @Override
         public void onClick(View v) {
             final AlertDialog.Builder highScores = new AlertDialog.Builder(HomeScreen.this);
-            highScores.setMessage("High Scores");
+            highScores.setTitle("High Scores");
 
-            final String scores =
-                    "\t\t\tScore:\tLetters per second:" +
-                    "Easy Level:\t\t" + getHighScore(Level.EASY) + "\n\n" +
-                    "Medium Level:\t\t" + getHighScore(Level.MEDIUM) + "\n\n" +
-                    "Pro. Level:\t\t" + getHighScore(Level.DIFFICULT) + "\n\n\n" +
-                    "N/F = Never Finished";
+            final LinearLayout theLayout = new LinearLayout(theC);
+            theLayout.setOrientation(LinearLayout.VERTICAL);
+            //theLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+            final LinearLayout theTitles = getLayout();
+
+            theTitles.addView(getTV("", Gravity.LEFT));
+            theTitles.addView(getTV("Score", Gravity.CENTER));
+            theTitles.addView(getTV("LPS", Gravity.CENTER));
+
+            final LinearLayout easy = getLayout();
+            easy.addView(getTV("Easy", Gravity.LEFT));
+            easy.addView(getTV(getValue(TAG_EASY_SCORE), Gravity.CENTER));
+            easy.addView(getTV(getValue(TAG_EASY_LPS), Gravity.CENTER));
+
+            final LinearLayout medium = getLayout();
+            medium.addView(getTV("Medium", Gravity.LEFT));
+            medium.addView(getTV(getValue(TAG_MEDIUM_SCORE), Gravity.CENTER));
+            medium.addView(getTV(getValue(TAG_MEDIUM_LPS), Gravity.CENTER));
+
+
+            final LinearLayout pro = getLayout();
+            pro.addView(getTV("Pro", Gravity.LEFT));
+            pro.addView(getTV(getValue(TAG_DIFFICULT_SCORE), Gravity.CENTER));
+            pro.addView(getTV(getValue(TAG_DIFFICULT_LPS), Gravity.CENTER));
+
+            theLayout.addView(theTitles);
+            theLayout.addView(easy);
+            theLayout.addView(medium);
+            theLayout.addView(pro);
+
+            highScores.setView(theLayout);
 
             highScores.setPositiveButton("Hmm. Let me try to improve", new DialogInterface.OnClickListener() {
                 @Override
@@ -112,10 +143,32 @@ public class HomeScreen extends Activity {
                 }
             });
 
-            highScores.setMessage(scores);
             highScores.show();
         }
     };
+
+    private LinearLayout getLayout() {
+        final LinearLayout theLayout = new LinearLayout(theC);
+        theLayout.setOrientation(LinearLayout.HORIZONTAL);
+        theLayout.setWeightSum(1.0f);
+        theLayout.setPadding(10, 20, 0, 0);
+        return theLayout;
+    }
+
+
+
+    private final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+            LayoutParams.WRAP_CONTENT, 0.33f);
+
+    private TextView getTV(final String theText, final int theGravity) {
+        final TextView theTV = new TextView(theC);
+        theTV.setText(theText);
+        theTV.setTextColor(Color.BLACK);
+        theTV.setTextSize(20);
+        theTV.setGravity(theGravity);
+        theTV.setLayoutParams(tvParams);
+        return theTV;
+    }
 
     private final OnClickListener rateListener = new OnClickListener() {
         @Override
@@ -206,5 +259,9 @@ public class HomeScreen extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void log(final String TAG) {
+        Log.e("com.ryan.keyboardscrambler", TAG);
     }
 }
