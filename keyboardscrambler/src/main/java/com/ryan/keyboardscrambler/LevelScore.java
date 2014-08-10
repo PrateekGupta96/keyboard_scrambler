@@ -7,7 +7,7 @@ public class LevelScore {
     private final double lettersPerSecond;
     private final int score;
 
-    public LevelScore(com.ryan.keyboardscrambler.Level theLevel, double lettersPerSecond, int score) {
+    public LevelScore(Level theLevel, double lettersPerSecond, int score) {
         this.theLevel = theLevel;
         this.lettersPerSecond = lettersPerSecond;
         this.score = score;
