@@ -245,9 +245,23 @@ public abstract class KeyboardLevel extends Activity {
     public void setHighScore(final LevelScore theScore) {
         switch(theScore.getLevel()) {
             case EASY:
-                if(theScore.)
+                if(theScore.getScore() < getInt(TAG_EASY_SCORE)) {
+                    return;
+                }
+                break;
+            case MEDIUM:
+                if(theScore.getScore() < getInt(TAG_MEDIUM_SCORE)) {
+                    return;
+                }
+                break;
+            case DIFFICULT:
+                if(theScore.getScore() < getInt(TAG_DIFFICULT_SCORE)) {
+                    return;
+                }
+                break;
+            default:
+                break;
         }
-
 
         final Editor newScore = highScores.edit();
         switch(theScore.getTheLevel()) {

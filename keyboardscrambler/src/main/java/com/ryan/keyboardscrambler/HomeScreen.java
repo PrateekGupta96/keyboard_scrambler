@@ -28,9 +28,12 @@ public class HomeScreen extends Activity {
     private PopupMenu thePopup;
     private Context theC;
 
-    protected static final String TAG_EASY = "EASY_LEVEL_BEST";
-    protected static final String TAG_MEDIUM = "MEDIUM_LEVEL_BEST";
-    protected static final String TAG_DIFFICULT = "HARD_LEVEL_BEST";
+    protected static final String TAG_EASY_SCORE = "EASY_LEVEL_BEST_SCORE";
+    protected static final String TAG_EASY_LPS = "EASY_LEVEL_BEST_LPS";
+    protected static final String TAG_MEDIUM_SCORE = "MEDIUM_LEVEL_BEST_SCORE";
+    protected static final String TAG_MEDIUM_LPS = "MEDIUM_LEVEL_LPS";
+    protected static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
+    protected static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
     protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
     protected SharedPreferences highScores;
 
@@ -95,9 +98,12 @@ public class HomeScreen extends Activity {
             final AlertDialog.Builder highScores = new AlertDialog.Builder(HomeScreen.this);
             highScores.setMessage("High Scores");
 
-            final String scores = "Easy Level:\t" + getHighScore(Level.EASY) + "\n\n" +
-                    "Medium Level:\t" + getHighScore(Level.MEDIUM) + "\n\n" +
-                    "Pro. Level:\t" + getHighScore(Level.DIFFICULT) + "\n";
+            final String scores =
+                    "\t\t\tScore:\tLetters per second:" +
+                    "Easy Level:\t\t" + getHighScore(Level.EASY) + "\n\n" +
+                    "Medium Level:\t\t" + getHighScore(Level.MEDIUM) + "\n\n" +
+                    "Pro. Level:\t\t" + getHighScore(Level.DIFFICULT) + "\n\n\n" +
+                    "N/F = Never Finished";
 
             highScores.setPositiveButton("Hmm. Let me try to improve", new DialogInterface.OnClickListener() {
                 @Override
@@ -169,14 +175,18 @@ public class HomeScreen extends Activity {
         return true;
     }
 
+    private String getValue(final String TAG) {
+        return highScores.getString(TAG, "N/F");
+    }
+
     public String getHighScore(final Level theLevel) {
         switch(theLevel) {
             case EASY:
-                return highScores.getString(TAG_EASY, "Never finished");
+                return getValue(TAG_EASY_SCORE) + "\t" + getValue(TAG_EASY_LPS);
             case MEDIUM:
-                return highScores.getString(TAG_MEDIUM, "Never finished");
+                return getValue(TAG_MEDIUM_SCORE) + "\t" + getValue(TAG_MEDIUM_LPS);
             case DIFFICULT:
-                return highScores.getString(TAG_DIFFICULT, "Never finished");
+                return getValue(TAG_DIFFICULT_SCORE) + "\t" + getValue(TAG_DIFFICULT_LPS);
             default:
                 return "0";
         }
