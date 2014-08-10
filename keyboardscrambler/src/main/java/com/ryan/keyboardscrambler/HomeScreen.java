@@ -12,6 +12,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,6 +28,12 @@ public class HomeScreen extends Activity {
     private PopupMenu thePopup;
     private Context theC;
 
+    protected static final String TAG_EASY = "EASY_LEVEL_BEST";
+    protected static final String TAG_MEDIUM = "MEDIUM_LEVEL_BEST";
+    protected static final String TAG_DIFFICULT = "HARD_LEVEL_BEST";
+    protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
+    protected SharedPreferences highScores;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +42,7 @@ public class HomeScreen extends Activity {
 
         theWords = getIntent().getExtras().getStringArray("words");
         theC = getApplicationContext();
-
+        highScores = theC.getSharedPreferences(TAG_HIGH_SCORE, 0);
 
         startTV = (TextView) findViewById(R.id.startTV);
         howToPlayTV = (TextView) findViewById(R.id.howToPlayTV);
@@ -85,7 +92,22 @@ public class HomeScreen extends Activity {
     private final OnClickListener scoresListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            final AlertDialog.Builder scores = new AlertDialog.Builder(HomeScreen.this);
+            final AlertDialog.Builder highScores = new AlertDialog.Builder(HomeScreen.this);
+            highScores.setMessage("High Scores");
+
+            final String scores = "Easy Level:\t" + getHighScore(Level.EASY) + "\n\n" +
+                    "Medium Level:\t" + getHighScore(Level.MEDIUM) + "\n\n" +
+                    "Pro. Level:\t" + getHighScore(Level.DIFFICULT) + "\n";
+
+            highScores.setPositiveButton("Hmm. Let me try to improve", new android.content.DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(android.content.DialogInterface dialog, int which) {
+
+                }
+            });
+
+            highScores.setMessage(scores);
+            highScores.show();
         }
     };
 
@@ -145,6 +167,19 @@ public class HomeScreen extends Activity {
         theIntent.putExtra("words", theWords);
         startActivity(theIntent);
         return true;
+    }
+
+    public String getHighScore(final Level theLevel) {
+        switch(theLevel) {
+            case EASY:
+                return highScores.getString(TAG_EASY, "Never finished");
+            case MEDIUM:
+                return highScores.getString(TAG_MEDIUM, "Never finished");
+            case DIFFICULT:
+                return highScores.getString(TAG_DIFFICULT, "Never finished");
+            default:
+                return "0";
+        }
     }
 
     @Override
