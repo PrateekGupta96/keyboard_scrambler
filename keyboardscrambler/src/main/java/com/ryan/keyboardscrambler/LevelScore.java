@@ -13,6 +13,8 @@ public class LevelScore {
         this.score = score;
     }
 
+    public Level getLevel() { return theLevel; }
+
     public Level getTheLevel() {
         return theLevel;
     }

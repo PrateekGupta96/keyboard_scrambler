@@ -242,21 +242,26 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
-    public void setHighScore(final Level theLevel, final int theScore) {
-        setHighScore(theLevel, String.valueOf(theScore));
-    }
-
     public void setHighScore(final LevelScore theScore) {
+        switch(theScore.getLevel()) {
+            case EASY:
+                if(theScore.)
+        }
+
+
         final Editor newScore = highScores.edit();
         switch(theScore.getTheLevel()) {
             case EASY:
-                newScore.putString(TAG_EASY, theScore);
+                newScore.putString(TAG_EASY_LPS, String.valueOf(theScore.getLettersPerSecond()));
+                newScore.putInt(TAG_EASY_SCORE, theScore.getScore());
                 break;
             case MEDIUM:
-                newScore.putString(TAG_MEDIUM, theScore);
+                newScore.putString(TAG_MEDIUM_LPS, String.valueOf(theScore.getLettersPerSecond()));
+                newScore.putInt(TAG_MEDIUM_SCORE, theScore.getScore());
                 break;
             case DIFFICULT:
-                newScore.putString(TAG_DIFFICULT, theScore);
+                newScore.putString(TAG_DIFFICULT_LPS, String.valueOf(theScore.getLettersPerSecond()));
+                newScore.putInt(TAG_DIFFICULT_SCORE, theScore.getScore());
                 break;
             default:
                 break;
@@ -271,7 +276,7 @@ public abstract class KeyboardLevel extends Activity {
         return Double.parseDouble(getValue(TAG));
     }
     private int getInt(final String TAG) {
-        return highScores.getInteger(TAG, 0);
+        return highScores.getInt(TAG, 0);
     }
 
     public LevelScore getHighScore(final Level theLevel) {
