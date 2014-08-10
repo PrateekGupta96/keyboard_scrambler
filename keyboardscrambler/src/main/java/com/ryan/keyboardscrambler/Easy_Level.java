@@ -56,6 +56,7 @@ public class Easy_Level extends KeyboardLevel {
         });
     }
 
+
     protected String getLevelWord() {
         return super.getRandomWord();
     }

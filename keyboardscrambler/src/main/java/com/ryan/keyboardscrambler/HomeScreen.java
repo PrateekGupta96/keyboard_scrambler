@@ -10,14 +10,19 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
+import android.view.View.OnClickListener;
+import android.app.AlertDialog;
+import android.app.AlertDialog;
+import android.content.Context;
 
 //TODO: Look up how to make menu float in or look like it's floating
 
 public class HomeScreen extends Activity {
 
-    private TextView startTV;
+    private TextView startTV, howToPlayTV, scoresTV, rateOnPlayTV;
     private String[] theWords;
     private PopupMenu thePopup;
+    private Context theC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,13 @@ public class HomeScreen extends Activity {
         getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         theWords = getIntent().getExtras().getStringArray("words");
+        theC = getApplicationContext();
+
         startTV = (TextView) findViewById(R.id.startTV);
+        howToPlayTV = (TextView) findViewById(R.id.howToPlayTV);
+        scoresTV = (TextView) findViewById(R.id.scoresTV);
+        rateOnPlayTV = (TextView) findViewById(R.id.rateTV);
+
         thePopup = new PopupMenu(HomeScreen.this, findViewById(R.id.locationForChooseGameMenu));
 
         thePopup.getMenuInflater().inflate(R.menu.choose_level, thePopup.getMenu());
@@ -38,7 +49,36 @@ public class HomeScreen extends Activity {
                 thePopup.show();
             }
         });
+        howToPlayTV.setOnClickListener(howToPlayListener);
+        scoresTV.setOnClickListener(scoresListener);
+        rateOnPlayTV.setOnClickListener(rateListener);
     }
+
+    private final OnClickListener howToPlayListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final AlertDialog.Builder instructions = new AlertDialog.Builder(theC);
+
+            instructions.setTitle("How to Play");
+            instructions.setMessage("LOL");
+            instructions.create().show();
+        }
+    };
+
+    private final OnClickListener scoresListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final AlertDialog.Builder scores = new AlertDialog.Builder(theC);
+        }
+    };
+
+    private final OnClickListener rateListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+
     public class PopupMenuListenerChooseLevel implements OnMenuItemClickListener {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
