@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
 //TODO: Look up how to make menu float in or look like it's floating
 
@@ -32,6 +33,7 @@ public class HomeScreen extends Activity {
 
         theWords = getIntent().getExtras().getStringArray("words");
         theC = getApplicationContext();
+
 
         startTV = (TextView) findViewById(R.id.startTV);
         howToPlayTV = (TextView) findViewById(R.id.howToPlayTV);
@@ -57,18 +59,24 @@ public class HomeScreen extends Activity {
     private final OnClickListener howToPlayListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            final AlertDialog.Builder instructions = new AlertDialog.Builder(theC);
+            final AlertDialog.Builder instructions = new AlertDialog.Builder(HomeScreen.this);
 
             instructions.setTitle("How to Play");
             instructions.setMessage("LOL");
-            instructions.create().show();
+            instructions.setPositiveButton("I understand", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            instructions.show();
         }
     };
 
     private final OnClickListener scoresListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            final AlertDialog.Builder scores = new AlertDialog.Builder(theC);
+            final AlertDialog.Builder scores = new AlertDialog.Builder(HomeScreen.this);
         }
     };
 
@@ -132,9 +140,6 @@ public class HomeScreen extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
