@@ -99,7 +99,7 @@ public abstract class KeyboardLevel extends Activity {
 
     protected int getScore(final Level theLevel) {
         final double secPerChar = getLPS();
-        final int scoreSoFar = 1000 - (int) (secPerChar * 50);
+        final int scoreSoFar = 3000 - (int) (secPerChar * 100);
 
         switch(theLevel) {
             case EASY:
