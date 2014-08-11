@@ -24,25 +24,24 @@ import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 
-//TODO: Look up how to make menu float in or look like it's floating
-
 public class HomeScreen extends Activity {
 
-    private TextView startTV, howToPlayTV, scoresTV, rateOnPlayTV;
-    private String[] theWords;
-    private PopupMenu thePopup;
-    private Context theC;
-
-    protected static final String TAG_EASY_SCORE = "EASY_LEVEL_BEST_SCORE";
-    protected static final String TAG_EASY_LPS = "EASY_LEVEL_BEST_LPS";
-    protected static final String TAG_MEDIUM_SCORE = "MEDIUM_LEVEL_BEST_SCORE";
-    protected static final String TAG_MEDIUM_LPS = "MEDIUM_LEVEL_LPS";
-    protected static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
-    protected static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
-    protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
-    protected SharedPreferences highScores;
+    private static final String TAG_EASY_SCORE = "EASY_LEVEL_BEST_SCORE";
+    private static final String TAG_EASY_LPS = "EASY_LEVEL_BEST_LPS";
+    private static final String TAG_MEDIUM_SCORE = "MEDIUM_LEVEL_BEST_SCORE";
+    private static final String TAG_MEDIUM_LPS = "MEDIUM_LEVEL_LPS";
+    private static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
+    private static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
+    private static final String TAG_HIGH_SCORE = "HIGH_SCORES";
 
     private static final DecimalFormat theFormat = new DecimalFormat("##0.000");
+
+    private String[] theWords;
+
+    private Context theC;
+    private SharedPreferences highScores;
+    private TextView startTV, howToPlayTV, scoresTV, rateOnPlayTV;
+    private PopupMenu thePopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
