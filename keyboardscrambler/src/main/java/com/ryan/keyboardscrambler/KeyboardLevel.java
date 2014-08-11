@@ -2,10 +2,12 @@ package com.ryan.keyboardscrambler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.app.AlertDialog.Builder;
 import android.app.AlertDialog;
+import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -223,7 +225,82 @@ public abstract class KeyboardLevel extends Activity {
     private void showScoreDialog(final LevelScore theScore) {
         AlertDialog.Builder theAlert = new AlertDialog.Builder(theC);
 
+        if(isHighScore(theScore)) {
+            theAlert.setTitle("New High Score for " + theScore.getLevel().toString());
+        }
+        else {
+            theAlert.setTitle(theScore.getLevel().toString());
+        }
 
+        final LinearLayout theLayout = new LinearLayout(theC);
+        theLayout.setOrientation(LinearLayout.VERTICAL);
+
+        final LinearLayout theTitles = getLayout();
+        theTitles.addView(getTV("          ", Gravity.LEFT));
+        theTitles.addView(getTV("Score", Gravity.CENTER));
+        theTitles.addView(getTV("LPS", Gravity.CENTER));
+
+        final LinearLayout highScore = getLayout();
+        highScore.addView(getTV("High Score", Gravity.LEFT));
+        highScore.addView(getTV(getValue(TAG_EASY_SCORE), Gravity.CENTER));
+        highScore.addView(getTV(getValue(TAG_EASY_LPS), Gravity.CENTER));
+
+        final LinearLayout yourScore = getLayout();
+        yourScore.addView(getTV("Your Score", Gravity.LEFT));
+        yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
+        yourScore.addView(getTV(String.valueOf(theScore.getLettersPerSecond()), Gravity.CENTER));
+
+        theLayout.addView(theTitles);
+        theLayout.addView(highScore);
+        theLayout.addView(yourScore);
+
+        theLayout.addView(getAsterixTV("LPS = Letters per second"));
+        theLayout.addView(getAsterixTV("N/F = Not Finished"));
+        theLayout.addView(getLayout());
+
+        theAlert.setView(theLayout);
+
+        theAlert.setPositiveButton("Hmm. Let me try to improve", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        theAlert.show();
+
+    }
+
+
+    private TextView getAsterixTV(final String message) {
+        final TextView theTV = new TextView(theC);
+        theTV.setText(message);
+        theTV.setTextSize(15);
+        theTV.setGravity(Gravity.CENTER);
+        theTV.setPadding(0, 80, 0, 0);
+        theTV.setTextColor(Color.parseColor("#ffff4444"));
+        return theTV;
+    }
+
+    private LinearLayout getLayout() {
+        final LinearLayout theLayout = new LinearLayout(theC);
+        theLayout.setOrientation(LinearLayout.HORIZONTAL);
+        theLayout.setWeightSum(1.0f);
+        theLayout.setPadding(15, 40, 0, 0);
+        return theLayout;
+    }
+
+    private final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+            LayoutParams.WRAP_CONTENT, 0.33f);
+
+    private TextView getTV(final String theText, final int theGravity) {
+        final TextView theTV = new TextView(theC);
+        theTV.setText(theText);
+        theTV.setTextColor(Color.BLACK);
+        theTV.setTextSize(20);
+        theTV.setGravity(theGravity);
+        theTV.setLayoutParams(tvParams);
+        return theTV;
     }
 
     private class UpdateTimeTV implements Runnable {
@@ -251,25 +328,33 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
-    public void setHighScore(final LevelScore theScore) {
+    public boolean isHighScore(final LevelScore theScore) {
         switch(theScore.getLevel()) {
             case EASY:
                 if(theScore.getScore() < getInt(TAG_EASY_SCORE)) {
-                    return;
+                    return false;
                 }
                 break;
             case MEDIUM:
                 if(theScore.getScore() < getInt(TAG_MEDIUM_SCORE)) {
-                    return;
+                    return false ;
                 }
                 break;
             case DIFFICULT:
                 if(theScore.getScore() < getInt(TAG_DIFFICULT_SCORE)) {
-                    return;
+                    return false;
                 }
                 break;
             default:
                 break;
+        }
+        return true;
+    }
+
+    public void setHighScore(final LevelScore theScore) {
+
+        if(!isHighScore(theScore)) {
+            return;
         }
 
         final Editor newScore = highScores.edit();
