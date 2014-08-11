@@ -1,6 +1,5 @@
 package com.ryan.keyboardscrambler;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;

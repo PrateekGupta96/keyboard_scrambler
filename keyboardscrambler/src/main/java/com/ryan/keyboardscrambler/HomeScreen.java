@@ -1,28 +1,28 @@
 package com.ryan.keyboardscrambler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
-import android.widget.LinearLayout;
 import android.view.MenuItem;
-import android.view.ViewGroup.LayoutParams;
 import android.view.View;
+import java.text.DecimalFormat;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
-import android.app.AlertDialog;
-import android.util.Log;
-import android.content.SharedPreferences;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.net.Uri;
-import android.content.ActivityNotFoundException;
 
 //TODO: Look up how to make menu float in or look like it's floating
 
@@ -41,6 +41,8 @@ public class HomeScreen extends Activity {
     protected static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
     protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
     protected SharedPreferences highScores;
+
+    private static final DecimalFormat theFormat = new DecimalFormat("##0.000");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +107,8 @@ public class HomeScreen extends Activity {
 
             final LinearLayout theLayout = new LinearLayout(theC);
             theLayout.setOrientation(LinearLayout.VERTICAL);
-            //theLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
             final LinearLayout theTitles = getLayout();
-
             theTitles.addView(getTV("         ", Gravity.LEFT));
             theTitles.addView(getTV("Score", Gravity.CENTER));
             theTitles.addView(getTV("LPS", Gravity.CENTER));
@@ -188,9 +188,11 @@ public class HomeScreen extends Activity {
             final Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
             try {
                 startActivity(goToMarket);
-            } catch (ActivityNotFoundException e) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" +
-                        theC.getPackageName())));
+            }
+            catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" +
+                                theC.getPackageName())));
             }
         }
     };
@@ -241,7 +243,16 @@ public class HomeScreen extends Activity {
 
     private String getValue(final String TAG) {
         try {
-            return highScores.getString(TAG, "N/F");
+            final String value = highScores.getString(TAG, "N/F");
+            if(value.equals("N/F")) {
+                return "N/F";
+            }
+            try {
+                return theFormat.format(Double.parseDouble(value));
+            }
+            catch(Exception e) {
+                return value;
+            }
         }
         catch(ClassCastException e) {
             final int theScore = highScores.getInt(TAG, 0);

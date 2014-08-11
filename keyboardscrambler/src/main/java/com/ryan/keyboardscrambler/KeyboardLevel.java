@@ -2,6 +2,8 @@ package com.ryan.keyboardscrambler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -19,8 +21,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 /**
  * A level of the game
  */
