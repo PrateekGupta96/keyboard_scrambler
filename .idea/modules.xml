@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KeyboardScrambler.iml" filepath="$PROJECT_DIR$/KeyboardScrambler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/keyboardscrambler/keyboardscrambler.iml" filepath="$PROJECT_DIR$/keyboardscrambler/keyboardscrambler.iml" />
     </modules>
   </component>
 </project>
