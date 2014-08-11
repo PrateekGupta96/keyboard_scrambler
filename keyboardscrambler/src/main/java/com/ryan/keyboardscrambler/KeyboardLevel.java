@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.app.AlertDialog.Builder;
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -201,10 +203,10 @@ public abstract class KeyboardLevel extends Activity {
             stopTimer();
             makeToast("You finished! " + getElapsed());
 
-            final int score = getScore(LEVEL);
-            final double lps = getLPS();
-            setHighScore(new LevelScore(LEVEL, lps, score));
-            log("Score\t" + score + "LPS:\t" + lps);
+            final LevelScore theScore = new LevelScore(LEVEL, getLPS(), getScore(LEVEL));
+            showScoreDialog(theScore);
+            setHighScore(theScore);
+            log("Score\t" + theScore.getClass() + "LPS:\t" + theScore.getLettersPerSecond());
             return;
         }
 
@@ -216,6 +218,12 @@ public abstract class KeyboardLevel extends Activity {
             makeToast("Last word!");
         else
             makeToast(more + " more words!");
+    }
+
+    private void showScoreDialog(final LevelScore theScore) {
+        AlertDialog.Builder theAlert = new AlertDialog.Builder(theC);
+
+
     }
 
     private class UpdateTimeTV implements Runnable {
