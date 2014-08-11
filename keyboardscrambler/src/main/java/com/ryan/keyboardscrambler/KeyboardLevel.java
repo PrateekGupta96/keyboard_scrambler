@@ -223,7 +223,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     private void showScoreDialog(final LevelScore theScore) {
-        AlertDialog.Builder theAlert = new AlertDialog.Builder(theC);
+        AlertDialog.Builder theAlert = new AlertDialog.Builder(KeyboardLevel.this);
 
         if(isHighScore(theScore)) {
             theAlert.setTitle("New High Score for " + theScore.getLevel().toString());
@@ -378,7 +378,12 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     private String getValue(final String TAG) {
-        return highScores.getString(TAG, "0");
+        try {
+            return highScores.getString(TAG, "0");
+        }
+        catch (Exception e) {
+            return String.valueOf(highScores.getInt(TAG, 0));
+        }
     }
     private double getDouble(final String TAG) {
         return Double.parseDouble(getValue(TAG));
