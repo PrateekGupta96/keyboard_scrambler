@@ -255,11 +255,12 @@ public abstract class KeyboardLevel extends Activity {
         yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
         yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
-        final LinearLayout differenceScore = getDifferenceScoreLayout(theLevel);
+        final LinearLayout differenceScore = getDifferenceScoreLayout(theScore);
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);
         theLayout.addView(yourScore);
+        theLayout.addView(differenceScore);
 
         theLayout.addView(getAsterixTV("LPS = Letters per second"));
         theLayout.addView(getAsterixTV("N/F = Not Finished"));
@@ -303,13 +304,39 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
-    private LinearLayout getDifferenceScoreLayout(final Level theLevel) {
+    private LinearLayout getDifferenceScoreLayout(final LevelScore theScore) {
         final LinearLayout theLayout = getLayout();
 
         theLayout.addView(getTV("Difference", Gravity.LEFT));
 
-        //final int scoreDiff =
+        final String aString = getValue(getLevelTagScore(theScore.getLevel()));
+        if(aString.contains("N/F") || aString.contains("0")) {
+            theLayout.addView(getTV("N/F", Gravity.CENTER));
+            theLayout.addView(getTV("N/F", Gravity.CENTER));
+            return theLayout;
+        }
 
+        final int scoreDiff = theScore.getScore() - Integer.parseInt(aString);
+        final TextView scoreV = getTV(String.valueOf(scoreDiff), Gravity.CENTER);
+        if(scoreDiff < 0) {
+            scoreV.setTextColor(Color.RED);
+        }
+        else {
+            scoreV.setTextColor(Color.GREEN);
+        }
+
+        final double lpsDiff = theScore.getLettersPerSecond() -
+                Double.parseDouble(getLevelTagLPS(theScore.getLevel()));
+        final TextView lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
+        if(lpsDiff < 0) {
+            lpsV.setTextColor(Color.RED);
+        }
+        else {
+            lpsV.setTextColor(Color.GREEN);
+        }
+
+        theLayout.addView(scoreV);
+        theLayout.addView(lpsV);
         return theLayout;
     }
 
