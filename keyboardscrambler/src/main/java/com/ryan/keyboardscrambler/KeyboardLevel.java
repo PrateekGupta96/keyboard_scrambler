@@ -400,7 +400,6 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     public void setHighScore(final LevelScore theScore) {
-
         if(!isHighScore(theScore)) {
             return;
         }
@@ -409,7 +408,7 @@ public abstract class KeyboardLevel extends Activity {
 
         newScore.putString(getLevelTagScore(theScore.getLevel()), String.valueOf(theScore.getLettersPerSecond()));
         newScore.putInt(getLevelTagLPS(theScore.getLevel()), theScore.getScore());
-        
+
         newScore.commit();
     }
 
@@ -439,16 +438,9 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     public LevelScore getHighScore(final Level theLevel) {
-        switch(theLevel) {
-            case EASY:
-                return new LevelScore(theLevel, getDouble(TAG_EASY_LPS), getInt(TAG_EASY_SCORE));
-            case MEDIUM:
-                return new LevelScore(theLevel, getDouble(TAG_MEDIUM_LPS), getInt(TAG_MEDIUM_SCORE));
-            case DIFFICULT:
-                return new LevelScore(theLevel, getDouble(TAG_DIFFICULT_LPS), getInt(TAG_DIFFICULT_SCORE));
-            default:
-                return new LevelScore(theLevel, 0, 0);
-        }
+        return new LevelScore(theLevel,
+                getDouble(getLevelTagLPS(theLevel)),
+                getInt(getLevelTagScore(theLevel)));
     }
 
     @Override
