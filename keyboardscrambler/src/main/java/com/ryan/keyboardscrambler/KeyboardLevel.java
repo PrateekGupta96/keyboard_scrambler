@@ -49,6 +49,9 @@ public abstract class KeyboardLevel extends Activity {
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected static final Random theGenerator = new Random();
 
+    protected static final LinearLayout.LayoutParams tvParams =  new LinearLayout.LayoutParams(
+            LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 0.33f);
+
     protected Context theC;
     protected SharedPreferences highScores;
     protected Level LEVEL;
@@ -70,7 +73,6 @@ public abstract class KeyboardLevel extends Activity {
 
     private UpdateTimeTV theUpdater;
     private int secs, minutes, seconds, milliseconds;
-
 
     protected abstract String getLevelWord();
 
@@ -94,8 +96,9 @@ public abstract class KeyboardLevel extends Activity {
 
         String theResult = "";
 
-        while (theChars.size() != 0)
+        while (theChars.size() != 0) {
             theResult += theChars.remove((int) (Math.random() * theChars.size()));
+        }
 
         return theResult;
     }
@@ -140,7 +143,7 @@ public abstract class KeyboardLevel extends Activity {
     /** Intializes dimension variables */
     private void setDimensions()  {
         final Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
+        final Point size = new Point();
         display.getSize(size);
         width = size.x;
         height = size.y;
@@ -171,14 +174,16 @@ public abstract class KeyboardLevel extends Activity {
                 String theR = userResponse.getText().toString();
 
                 if(theV.getText().toString().equals(DELETE_CHAR))  {
-                    if(theR.length() == 0)
+                    if(theR.length() == 0) {
                         return;
+                    }
                     userResponse.setText(theR.substring(0, theR.length()-1));
                     return;
                 }
 
-                else
+                else {
                     theR += theV.getText().toString();
+                }
 
                 userResponse.setText(theR);
 
@@ -195,8 +200,9 @@ public abstract class KeyboardLevel extends Activity {
     protected String getRandomWord() {
         final String theWord =  theWords[theGenerator.nextInt(theWords.length)].replace(" ", "");
 
-        if(theWord.length() < 4)
+        if(theWord.length() < 4) {
             return getRandomWord();
+        }
         return theWord;
     }
 
@@ -219,10 +225,12 @@ public abstract class KeyboardLevel extends Activity {
 
         refresh.setText(getLevelWord());
         userResponse.setText("");
-        if(more == 1)
+        if(more == 1) {
             makeToast("Last word!");
-        else
+        }
+        else {
             makeToast(more + " more words!");
+        }
     }
 
     private void showScoreDialog(final LevelScore theScore) {
@@ -310,6 +318,7 @@ public abstract class KeyboardLevel extends Activity {
         theLayout.addView(getTV("Difference", Gravity.LEFT));
 
         final String aString = getValue(getLevelTagScore(theScore.getLevel()));
+
         if(aString.contains("N/F") || aString.contains("0")) {
             theLayout.addView(getTV("N/F", Gravity.CENTER));
             theLayout.addView(getTV("N/F", Gravity.CENTER));
@@ -318,6 +327,7 @@ public abstract class KeyboardLevel extends Activity {
 
         final int scoreDiff = theScore.getScore() - Integer.parseInt(aString);
         final TextView scoreV = getTV(String.valueOf(scoreDiff), Gravity.CENTER);
+
         if(scoreDiff < 0) {
             scoreV.setTextColor(Color.parseColor("#ffff4444"));
         }
@@ -328,6 +338,7 @@ public abstract class KeyboardLevel extends Activity {
         final double lpsDiff = theScore.getLettersPerSecond() -
                 Double.parseDouble(getValue(getLevelTagLPS(theScore.getLevel())));
         final TextView lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
+
         if(lpsDiff > 0) {
             lpsV.setTextColor(Color.parseColor("#ffff4444"));
         }
@@ -357,9 +368,6 @@ public abstract class KeyboardLevel extends Activity {
         theLayout.setPadding(15, 40, 0, 0);
         return theLayout;
     }
-
-    private final LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT, 0.33f);
 
     private TextView getTV(final String theText, final int theGravity) {
         final TextView theTV = new TextView(theC);
