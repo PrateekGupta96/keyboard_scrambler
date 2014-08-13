@@ -246,7 +246,7 @@ public abstract class KeyboardLevel extends Activity {
         final LinearLayout highScore = getLayout();
         highScore.addView(getTV("High Score", Gravity.LEFT));
         highScore.addView(getTV(getValue(TAG_EASY_SCORE), Gravity.CENTER));
-        highScore.addView(getTV(getValue(TAG_EASY_LPS), Gravity.CENTER));
+        highScore.addView(getTV((getValue(TAG_EASY_LPS)), Gravity.CENTER));
 
         final LinearLayout yourScore = getLayout();
         yourScore.addView(getTV("Your Score", Gravity.LEFT));
@@ -260,7 +260,7 @@ public abstract class KeyboardLevel extends Activity {
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);
-        //theLayout.addView(yourScore);
+        theLayout.addView(yourScore);
 
         theLayout.addView(getAsterixTV("LPS = Letters per second"));
         theLayout.addView(getAsterixTV("N/F = Not Finished"));
@@ -386,7 +386,17 @@ public abstract class KeyboardLevel extends Activity {
 
     private String getValue(final String TAG) {
         try {
-            return highScores.getString(TAG, "0");
+            final String high = highScores.getString(TAG, "0");
+            if(high.contains("N/F") || high.contains("0")) {
+                return high;
+            }
+            else {
+                try {
+                    return theFormat.format(Double.parseDouble(high));
+                } catch (Exception e) {
+                    return high;
+                }
+            }
         }
         catch (Exception e) {
             return String.valueOf(highScores.getInt(TAG, 0));
