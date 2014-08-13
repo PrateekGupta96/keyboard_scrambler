@@ -9,5 +9,6 @@
     <string name="title_activity_medium_level">Keyboard Scrambler Medium Level</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_easy__level">Keyboard Scrambler Easy Level</string>
+    <string name="title_activity_dvorak__level">Dvorak_Level</string>
 
 </resources>
