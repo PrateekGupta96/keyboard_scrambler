@@ -319,10 +319,10 @@ public abstract class KeyboardLevel extends Activity {
         final int scoreDiff = theScore.getScore() - Integer.parseInt(aString);
         final TextView scoreV = getTV(String.valueOf(scoreDiff), Gravity.CENTER);
         if(scoreDiff < 0) {
-            scoreV.setTextColor(Color.RED);
+            scoreV.setTextColor(Color.parseColor("#ffff4444")); //#ffcc0000
         }
         else {
-            scoreV.setTextColor(Color.GREEN);
+            scoreV.setTextColor(Color.parseColor("#ff99cc00")); //#ff669900
         }
 
         final double lpsDiff = theScore.getLettersPerSecond() -
