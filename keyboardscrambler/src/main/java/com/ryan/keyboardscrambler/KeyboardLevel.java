@@ -254,9 +254,9 @@ public abstract class KeyboardLevel extends Activity {
         yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
         final LinearLayout differenceScore = getLayout();
-        yourScore.addView(getTV("Difference", Gravity.LEFT));
-        yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
-        yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
+        differenceScore.addView(getTV("Difference", Gravity.LEFT));
+        differenceScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
+        differenceScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);

@@ -45,6 +45,12 @@ public class SplashActivity extends Activity {
 
     private class LoadWords extends AsyncTask<Void, Integer, String[]> {
 
+        final long startTime;
+
+        public LoadWords() {
+            startTime = System.currentTimeMillis();
+        }
+
         @Override
         protected String[] doInBackground(Void... params)  {
             InputStreamReader theISR = null;
@@ -114,6 +120,8 @@ public class SplashActivity extends Activity {
             toHomeScreen.putExtra("words", theWords);
 
             log("Array:\t" + (System.currentTimeMillis() - st));
+
+            log("Total time:\t" + (System.currentTimeMillis() - startTime));
 
             int timeLeft = (int) ((System.currentTimeMillis() - startTime)/1000);
 
