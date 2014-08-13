@@ -247,15 +247,15 @@ public abstract class KeyboardLevel extends Activity {
 
         final LinearLayout highScore = getLayout();
         highScore.addView(getTV("High Score", Gravity.LEFT));
-        highScore.addView(getTV(getValue(TAG_EASY_SCORE), Gravity.CENTER));
-        highScore.addView(getTV((getValue(TAG_EASY_LPS)), Gravity.CENTER));
+        highScore.addView(getTV(getValue(getLevelTagScore(theLevel)), Gravity.CENTER));
+        highScore.addView(getTV((getValue(getLevelTagLPS(theLevel))), Gravity.CENTER));
 
         final LinearLayout yourScore = getLayout();
         yourScore.addView(getTV("Your Score", Gravity.LEFT));
         yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
         yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
-        final LinearLayout differenceScore = getDifferenceScoreLayout();
+        final LinearLayout differenceScore = getDifferenceScoreLayout(theLevel);
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);
@@ -303,7 +303,7 @@ public abstract class KeyboardLevel extends Activity {
         }
     }
 
-    private LinearLayout getDifferenceScoreLayout() {
+    private LinearLayout getDifferenceScoreLayout(final Level theLevel) {
         final LinearLayout theLayout = getLayout();
 
         theLayout.addView(getTV("Difference", Gravity.LEFT));
