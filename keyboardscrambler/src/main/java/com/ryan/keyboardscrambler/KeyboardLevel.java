@@ -235,6 +235,8 @@ public abstract class KeyboardLevel extends Activity {
             theAlert.setTitle(theScore.getLevel().toString());
         }
 
+        final Level theLevel = theScore.getLevel();
+
         final LinearLayout theLayout = new LinearLayout(theC);
         theLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -253,10 +255,7 @@ public abstract class KeyboardLevel extends Activity {
         yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
         yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
-        final LinearLayout differenceScore = getLayout();
-        differenceScore.addView(getTV("Difference", Gravity.LEFT));
-        differenceScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
-        differenceScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
+        final LinearLayout differenceScore = getDifferenceScoreLayout();
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);
@@ -276,7 +275,42 @@ public abstract class KeyboardLevel extends Activity {
         });
 
         theAlert.show();
+    }
 
+    private String getLevelTagLPS(final Level theLevel) {
+        switch (theLevel) {
+            case EASY:
+                return TAG_EASY_LPS;
+            case MEDIUM:
+                return TAG_MEDIUM_LPS;
+            case DIFFICULT:
+                return TAG_DIFFICULT_LPS;
+            default:
+                return "";
+        }
+    }
+
+    private String getLevelTagScore(final Level theLevel) {
+        switch (theLevel) {
+            case EASY:
+                return TAG_EASY_SCORE;
+            case MEDIUM:
+                return TAG_MEDIUM_SCORE;
+            case DIFFICULT:
+                return TAG_DIFFICULT_SCORE;
+            default:
+                return "";
+        }
+    }
+
+    private LinearLayout getDifferenceScoreLayout() {
+        final LinearLayout theLayout = getLayout();
+
+        theLayout.addView(getTV("Difference", Gravity.LEFT));
+
+        //final int scoreDiff =
+
+        return theLayout;
     }
 
     private TextView getAsterixTV(final String message) {
