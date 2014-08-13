@@ -388,7 +388,6 @@ public abstract class KeyboardLevel extends Activity {
             seconds = secs % 60;
             milliseconds = (int) (elapsed % 1000);
 
-            String.format("%03d", secs);
             timeView.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds) + ":" +
                     String.format("%03d", milliseconds));
 
@@ -397,26 +396,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     public boolean isHighScore(final LevelScore theScore) {
-        switch(theScore.getLevel()) {
-            case EASY:
-                if(theScore.getScore() < getInt(TAG_EASY_SCORE)) {
-                    return false;
-                }
-                break;
-            case MEDIUM:
-                if(theScore.getScore() < getInt(TAG_MEDIUM_SCORE)) {
-                    return false ;
-                }
-                break;
-            case DIFFICULT:
-                if(theScore.getScore() < getInt(TAG_DIFFICULT_SCORE)) {
-                    return false;
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
+        return (theScore.getScore() < getInt(getLevelTagScore(theScore.getLevel())));
     }
 
     public void setHighScore(final LevelScore theScore) {
@@ -426,22 +406,10 @@ public abstract class KeyboardLevel extends Activity {
         }
 
         final Editor newScore = highScores.edit();
-        switch(theScore.getTheLevel()) {
-            case EASY:
-                newScore.putString(TAG_EASY_LPS, String.valueOf(theScore.getLettersPerSecond()));
-                newScore.putInt(TAG_EASY_SCORE, theScore.getScore());
-                break;
-            case MEDIUM:
-                newScore.putString(TAG_MEDIUM_LPS, String.valueOf(theScore.getLettersPerSecond()));
-                newScore.putInt(TAG_MEDIUM_SCORE, theScore.getScore());
-                break;
-            case DIFFICULT:
-                newScore.putString(TAG_DIFFICULT_LPS, String.valueOf(theScore.getLettersPerSecond()));
-                newScore.putInt(TAG_DIFFICULT_SCORE, theScore.getScore());
-                break;
-            default:
-                break;
-        }
+
+        newScore.putString(getLevelTagScore(theScore.getLevel()), String.valueOf(theScore.getLettersPerSecond()));
+        newScore.putInt(getLevelTagLPS(theScore.getLevel()), theScore.getScore());
+        
         newScore.commit();
     }
 
