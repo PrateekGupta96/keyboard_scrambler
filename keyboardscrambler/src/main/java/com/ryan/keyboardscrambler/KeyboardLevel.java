@@ -328,7 +328,7 @@ public abstract class KeyboardLevel extends Activity {
         final double lpsDiff = theScore.getLettersPerSecond() -
                 Double.parseDouble(getValue(getLevelTagLPS(theScore.getLevel())));
         final TextView lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
-        if(lpsDiff < 0) {
+        if(lpsDiff > 0) {
             lpsV.setTextColor(Color.RED);
         }
         else {
