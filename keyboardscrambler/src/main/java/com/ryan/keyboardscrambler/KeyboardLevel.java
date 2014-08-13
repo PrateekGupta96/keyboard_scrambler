@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.app.AlertDialog.Builder;
+import java.text.DecimalFormat;
 import android.app.AlertDialog;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
@@ -42,6 +43,8 @@ public abstract class KeyboardLevel extends Activity {
     protected static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
     protected static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
     protected static final String TAG_HIGH_SCORE = "HIGH_SCORES";
+
+    protected static final DecimalFormat theFormat = new DecimalFormat("##0.000");
 
     protected static final NumberFormat theTwoF = NumberFormat.getInstance();
     protected static final Random theGenerator = new Random();
@@ -248,11 +251,16 @@ public abstract class KeyboardLevel extends Activity {
         final LinearLayout yourScore = getLayout();
         yourScore.addView(getTV("Your Score", Gravity.LEFT));
         yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
-        yourScore.addView(getTV(String.valueOf(theScore.getLettersPerSecond()), Gravity.CENTER));
+        yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
+
+        final LinearLayout differenceScore = getLayout();
+        yourScore.addView(getTV("Difference", Gravity.LEFT));
+        yourScore.addView(getTV(String.valueOf(theScore.getScore()), Gravity.CENTER));
+        yourScore.addView(getTV(theFormat.format(theScore.getLettersPerSecond()), Gravity.CENTER));
 
         theLayout.addView(theTitles);
         theLayout.addView(highScore);
-        theLayout.addView(yourScore);
+        //theLayout.addView(yourScore);
 
         theLayout.addView(getAsterixTV("LPS = Letters per second"));
         theLayout.addView(getAsterixTV("N/F = Not Finished"));
@@ -270,7 +278,6 @@ public abstract class KeyboardLevel extends Activity {
         theAlert.show();
 
     }
-
 
     private TextView getAsterixTV(final String message) {
         final TextView theTV = new TextView(theC);
