@@ -20,6 +20,8 @@ public class Dvorak_Level extends KeyboardLevel {
     private static final String theStr = "~1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz";
     private static final String punctuation = "\",.?=\\:~";
 
+    private LinearLayout fifthRow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class Dvorak_Level extends KeyboardLevel {
         secondRow = (LinearLayout) findViewById(R.id.secondRow);
         thirdRow = (LinearLayout) findViewById(R.id.thirdRow);
         fourthRow = (LinearLayout) findViewById(R.id.fourthRow);
+        fifthRow = (LinearLayout) findViewById(R.id.fifthRow);
 
         //Shows characters user pressed
         userResponse = (TextView) findViewById(R.id.userResponseTV);
@@ -52,6 +55,8 @@ public class Dvorak_Level extends KeyboardLevel {
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
+        for(byte i = 0; i < 1; i++, counter++)
+            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
@@ -63,12 +68,15 @@ public class Dvorak_Level extends KeyboardLevel {
                 recreate();
             }
         });
-
-
     }
 
     protected String getLevelWord() {
-        return super.getRandomWord();
+        final String word1 = super.getRandomWord();
+        final char punctuation1 = punctuation.charAt(theGenerator.nextInt(punctuation.length()));
+        final String word2 = super.getRandomWord();
+        final char punctuation2 = punctuation.charAt(theGenerator.nextInt(punctuation.length()));
+
+        return word1 + " " + punctuation1 + " " + word2 + " " + punctuation2;
     }
 
 
