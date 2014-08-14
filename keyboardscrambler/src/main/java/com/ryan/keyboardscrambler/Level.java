@@ -1,5 +1,5 @@
 package com.ryan.keyboardscrambler;
 
 public enum Level {
-    EASY, MEDIUM, DIFFICULT;
+    EASY, MEDIUM, DIFFICULT, DVORAK;
 }

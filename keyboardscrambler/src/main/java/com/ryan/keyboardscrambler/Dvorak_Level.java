@@ -6,12 +6,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.ryan.keyboardscrambler.R;
 
-public class Dvorak_Level extends ActionBarActivity {
+public class Dvorak_Level extends KeyboardLevel {
+
+    private static final String theStr = "1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz";
+    private static final String punctuation = "\",.?=\\:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dvorak__level);
+
+
+
+
+    }
+
+    protected String getLevelWord() {
+        return super.getRandomWord();
     }
 
 
