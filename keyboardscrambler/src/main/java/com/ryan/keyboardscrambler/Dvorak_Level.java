@@ -53,7 +53,6 @@ public class Dvorak_Level extends KeyboardLevel {
             secondRow.addView(getCharTV(reArranged.charAt(counter), 13));
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        log("LENGTH: " + reArranged.length());
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 1; i++, counter++)
@@ -97,6 +96,11 @@ public class Dvorak_Level extends KeyboardLevel {
         if (id == R.id.action_settings) {
             return true;
         }
+
+        if(id == R.id.dvorak_label) {
+            log("OMETHING");
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
