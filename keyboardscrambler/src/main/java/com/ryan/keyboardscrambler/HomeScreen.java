@@ -32,6 +32,8 @@ public class HomeScreen extends Activity {
     private static final String TAG_MEDIUM_LPS = "MEDIUM_LEVEL_LPS";
     private static final String TAG_DIFFICULT_SCORE = "HARD_LEVEL_BEST_SCORE";
     private static final String TAG_DIFFICULT_LPS = "HARD_LEVEL_BEST_LPS";
+    private static final String TAG_DVORAK_SCORE = "DVORAK_LEVEL_BEST_SCORE";
+    private static final String TAG_DVORAK_LPS = "DVORAK_LEVEL_LPS";
     private static final String TAG_HIGH_SCORE = "HIGH_SCORES";
 
     private static final DecimalFormat theFormat = new DecimalFormat("##0.000");
@@ -127,10 +129,16 @@ public class HomeScreen extends Activity {
             pro.addView(getTV(getValue(TAG_DIFFICULT_SCORE), Gravity.CENTER));
             pro.addView(getTV(getValue(TAG_DIFFICULT_LPS), Gravity.CENTER));
 
+            final LinearLayout dvorak = getLayout();
+            dvorak.addView(getTV("Dvorak    ", Gravity.LEFT));
+            dvorak.addView(getTV(getValue(TAG_DVORAK_SCORE), Gravity.CENTER));
+            dvorak.addView(getTV(getValue(TAG_DVORAK_LPS), Gravity.CENTER));
+
             theLayout.addView(theTitles);
             theLayout.addView(easy);
             theLayout.addView(medium);
             theLayout.addView(pro);
+            theLayout.addView(dvorak);
 
             theLayout.addView(getAsterixTV("LPS = Letters per second"));
             theLayout.addView(getAsterixTV("N/F = Not Finished"));
@@ -210,6 +218,9 @@ public class HomeScreen extends Activity {
                 case R.id.hardLevelItem:
                     theIntent = new Intent(HomeScreen.this, HardLevel.class);
                     break;
+                case R.id.dvorakLevelItem:
+                    theIntent = new Intent(HomeScreen.this, Dvorak_Level.class);
+                    break;
                 default:
                     return false;
             }
@@ -231,6 +242,9 @@ public class HomeScreen extends Activity {
                 break;
             case R.id.hardLevelItem:
                 theIntent = new Intent(HomeScreen.this, HardLevel.class);
+                break;
+            case R.id.dvorakLevelItem:
+                theIntent = new Intent(HomeScreen.this, Dvorak_Level.class);
                 break;
             default:
                 return super.onContextItemSelected(item);
@@ -270,6 +284,8 @@ public class HomeScreen extends Activity {
                 return getValue(TAG_MEDIUM_SCORE) + "\t" + getValue(TAG_MEDIUM_LPS);
             case DIFFICULT:
                 return getValue(TAG_DIFFICULT_SCORE) + "\t" + getValue(TAG_DIFFICULT_LPS);
+            case DVORAK:
+                return getValue(TAG_DVORAK_SCORE) + "\t" + getValue(TAG_DVORAK_LPS);
             default:
                 return "0";
         }

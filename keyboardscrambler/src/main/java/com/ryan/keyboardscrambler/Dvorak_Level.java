@@ -24,7 +24,7 @@ public class Dvorak_Level extends KeyboardLevel {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, getIntent().getExtras().getStringArray("words"));
         setContentView(R.layout.dvorak__level);
 
         this.LEVEL = Level.DVORAK;
@@ -53,8 +53,9 @@ public class Dvorak_Level extends KeyboardLevel {
             secondRow.addView(getCharTV(reArranged.charAt(counter), 13));
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(byte i = 0; i < 10; i++, counter++)
-            fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
+        log("LENGTH: " + reArranged.length());
+        for(byte i = 0; i < 9; i++, counter++)
+            fourthRow.addView(getCharTV(reArranged.charAt(counter), 9));
         for(byte i = 0; i < 1; i++, counter++)
             fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));
 

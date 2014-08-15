@@ -10,4 +10,7 @@
     <item
         android:id="@+id/hardLevelItem"
         android:title="Pro" />
+    <item
+        android:id="@+id/dvorakLevelItem"
+        android:title="Dvorak" />
 </menu>
