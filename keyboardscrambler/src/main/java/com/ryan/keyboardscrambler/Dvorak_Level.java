@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class Dvorak_Level extends KeyboardLevel {
 
-    private static final String theStr = "~1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz";
+    private static final String theStr = "~1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz ";
     private static final String punctuation = "\",.?=\\:~";
 
     private LinearLayout fifthRow;
@@ -47,17 +47,17 @@ public class Dvorak_Level extends KeyboardLevel {
         int counter = 0;
 
         //Add the keys to the screen
-        for(byte i = 0; i < 14; i++, counter++)
-            firstRow.addView(getCharTV(reArranged.charAt(counter), 14));
+        for(byte i = 0; i < 12; i++, counter++)
+            firstRow.addView(getCharTV(reArranged.charAt(counter), 12));
         for(byte i = 0; i < 13; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 13));
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         log("LENGTH: " + reArranged.length());
-        /*for(byte i = 0; i < 9; i++, counter++)
-            fourthRow.addView(getCharTV(reArranged.charAt(counter), 9));
+        for(byte i = 0; i < 10; i++, counter++)
+            fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 1; i++, counter++)
-            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));*/
+            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
