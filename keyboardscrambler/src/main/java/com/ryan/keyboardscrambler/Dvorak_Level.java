@@ -54,10 +54,10 @@ public class Dvorak_Level extends KeyboardLevel {
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         log("LENGTH: " + reArranged.length());
-        for(byte i = 0; i < 9; i++, counter++)
+        /*for(byte i = 0; i < 9; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 9));
         for(byte i = 0; i < 1; i++, counter++)
-            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));
+            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));*/
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
