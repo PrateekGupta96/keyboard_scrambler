@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Random;
-
+import java.text.DecimalFormat;
 /** Words:
  *  http://listofrandomwords.com/index.cfm?blist
  */
@@ -24,6 +24,7 @@ public class SplashActivity extends Activity {
     private final Context theC = this;
     private static final String fileName = "keyboard_scrambler_words.txt";
     private static final Random theRandom = new Random();
+    private static final DecimalFormat theFormat = new DecimalFormat("00.00");
 
     private final short WORDS = 2185;
     private final short SIZE = 150;
@@ -67,16 +68,19 @@ public class SplashActivity extends Activity {
 
                 while(theReader.ready()) {
                     theInput.append(" " + theReader.readLine());
-                    publishProgress(counter);
                     counter++;
+
+                    if(counter % 10 == 0) {
+                        loadingTV.setText("Loading... " +
+                                theFormat.format(((((double)counter / (double)WORDS)) * 100.0))
+                                + "%");
+                    }
                 }
                 return theInput.toString().split(" ");
-                //return new ArrayList<String>(Arrays.asList(theInput.toString().split(" ")));
             }
             catch (Exception e) {
                 e.printStackTrace();
                 return new String[]{e.toString()};
-                //return new ArrayList<String>(Arrays.asList(new String[]{e.toString()}));
             }
 
             finally {
@@ -88,11 +92,6 @@ public class SplashActivity extends Activity {
                 }
                 catch (Exception e) { e.printStackTrace(); }
             }
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            loadingTV.setText("Loading... " + ((progress[0] / WORDS) * 100) + "%");
         }
 
         @Override
