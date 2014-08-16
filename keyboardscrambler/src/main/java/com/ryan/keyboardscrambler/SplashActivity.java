@@ -30,7 +30,6 @@ public class SplashActivity extends Activity {
     private final short SIZE = 150;
 
     private long startTime;
-    private final short MIN = 2; //Seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +90,12 @@ public class SplashActivity extends Activity {
 
             finally {
                 try {
-                    if (theISR != null)
+                    if (theISR != null) {
                         theISR.close();
-                    if (theReader != null)
+                    }
+                    if (theReader != null) {
                         theReader.close();
+                    }
                 }
                 catch (Exception e) { e.printStackTrace(); }
             }
@@ -126,7 +127,6 @@ public class SplashActivity extends Activity {
             toHomeScreen.putExtra("words", theWords);
 
             log("Array:\t" + (System.currentTimeMillis() - st));
-
             log("Total time:\t" + (System.currentTimeMillis() - startTime));
 
             startActivity(toHomeScreen);
