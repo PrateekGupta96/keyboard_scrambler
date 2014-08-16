@@ -59,9 +59,9 @@ public class Dvorak_Level extends KeyboardLevel {
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
-        final TextView blank1 = getCharTV(' ', 3);
-        final TextView space = getCharTV(' ', 3);
-        final TextView blank2 = getCharTV(' ', 3);
+        final TextView blank1 = getCharTV(' ', 4);
+        final TextView space = getCharTV(' ', 1);
+        final TextView blank2 = getCharTV(' ', 4);
 
         unformatView(blank1);
         unformatView(blank2);
