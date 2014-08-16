@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.app.AlertDialog.Builder;
 import java.text.DecimalFormat;
+import android.view.View.OnClickListener;
 import android.app.AlertDialog;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Color;
@@ -162,39 +163,42 @@ public abstract class KeyboardLevel extends Activity {
         theV.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         theV.setTextColor(Color.BLACK);
         theV.setBackgroundResource(R.drawable.keycharacter_border);
-        theV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!hasStarted) {
-                    hasStarted = true;
-                    startTimer();
-                }
-
-                String theR = userResponse.getText().toString();
-
-                if(theV.getText().toString().equals(DELETE_CHAR))  {
-                    if(theR.length() == 0) {
-                        return;
-                    }
-                    userResponse.setText(theR.substring(0, theR.length()-1));
-                    return;
-                }
-
-                else {
-                    theR += theV.getText().toString();
-                }
-
-                userResponse.setText(theR);
-
-                if(theR.equals(refresh.getText().toString()))   {
-                    userFinished();
-                    return;
-                }
-            }
-        });
+        theV.setOnClickListener(KeyPressedListener);
         return theV;
     }
+
+    private final OnClickListener KeyPressedListener = new android.view.View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final TextView theV = (TextView) v;
+
+            if (!hasStarted) {
+                hasStarted = true;
+                startTimer();
+            }
+
+            String theR = userResponse.getText().toString();
+
+            if(theV.getText().toString().equals(DELETE_CHAR))  {
+                if(theR.length() == 0) {
+                    return;
+                }
+                userResponse.setText(theR.substring(0, theR.length()-1));
+                return;
+            }
+
+            else {
+                theR += theV.getText().toString();
+            }
+
+            userResponse.setText(theR);
+
+            if(theR.equals(refresh.getText().toString()))   {
+                userFinished();
+                return;
+            }
+        }
+    };
 
     /** Returns random word */
     protected String getRandomWord() {

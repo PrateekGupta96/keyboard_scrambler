@@ -55,7 +55,8 @@ public class Dvorak_Level extends KeyboardLevel {
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        final TextView spaceView = (TextView) getCharTV(reArranged.charAt(counter), 3);
+        final TextView spaceView = getCharTV(reArranged.charAt(counter), 3);
+
         spaceView.setGravity(Gravity.CENTER_HORIZONTAL);
         fifthRow.addView(spaceView);
 
