@@ -60,7 +60,7 @@ public class Dvorak_Level extends KeyboardLevel {
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
 
         final TextView blank1 = getCharTV(' ', 4);
-        final TextView space = getCharTV(' ', 1);
+        final TextView space = getCharTV(' ', 2);
         final TextView blank2 = getCharTV(' ', 4);
 
         unformatView(blank1);
@@ -94,9 +94,15 @@ public class Dvorak_Level extends KeyboardLevel {
         final String word1 = super.getRandomWord();
         final char punctuation1 = punctuation.charAt(theGenerator.nextInt(punctuation.length()));
         final String word2 = super.getRandomWord();
-        final char punctuation2 = punctuation.charAt(theGenerator.nextInt(punctuation.length()));
 
-        return word1 + " " + punctuation1 + " " + word2 + " " + punctuation2;
+        //Randomly choose if there should be punctuation
+        if(theGenerator.nextInt(500) % 2 == 0) {
+            final char punctuation2 = punctuation.charAt(theGenerator.nextInt(punctuation.length()));
+            return word1 + " " + punctuation1 + " " + word2 + " " + punctuation2;
+        }
+        else {
+            return word1 + " " + punctuation1 + " " + word2;
+        }
     }
 
 
