@@ -151,7 +151,7 @@ public abstract class KeyboardLevel extends Activity {
     }
 
     /** Returns TextView with parameter character --> Used as keys */
-    protected View getCharTV(final char theChar, final int numInRow)    {
+    protected TextView getCharTV(final char theChar, final int numInRow)    {
         final TextView theV = new TextView(theC);
         theV.setMaxWidth(width / numInRow);
         theV.setMinWidth(width / numInRow);
