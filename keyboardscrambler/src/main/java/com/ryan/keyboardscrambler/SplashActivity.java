@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
     private static final Random theRandom = new Random();
     private static final DecimalFormat theFormat = new DecimalFormat("00.00");
 
-    private final short WORDS = 2185;
+    private final short WORDS = 4185;
     private final short SIZE = 150;
 
     private long startTime;
