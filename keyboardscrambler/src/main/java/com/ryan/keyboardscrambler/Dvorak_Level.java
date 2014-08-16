@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.ryan.keyboardscrambler.R;
-
+import android.view.Gravity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class Dvorak_Level extends KeyboardLevel {
 
-    private static final String theStr = "~1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz ";
-    private static final String punctuation = "\",.?=\\:~";
+    private static final String theStr = "1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz ";
+    private static final String punctuation = "\",.?=\\:";
 
     private LinearLayout fifthRow;
 
@@ -47,16 +47,17 @@ public class Dvorak_Level extends KeyboardLevel {
         int counter = 0;
 
         //Add the keys to the screen
-        for(byte i = 0; i < 12; i++, counter++)
-            firstRow.addView(getCharTV(reArranged.charAt(counter), 12));
+        for(byte i = 0; i < 11; i++, counter++)
+            firstRow.addView(getCharTV(reArranged.charAt(counter), 11));
         for(byte i = 0; i < 13; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 13));
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(byte i = 0; i < 1; i++, counter++)
-            fifthRow.addView(getCharTV(reArranged.charAt(counter), 1));
+        final TextView spaceView = (TextView) getCharTV(reArranged.charAt(counter), 3);
+        spaceView.setGravity(Gravity.CENTER_HORIZONTAL);
+        fifthRow.addView(spaceView);
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
