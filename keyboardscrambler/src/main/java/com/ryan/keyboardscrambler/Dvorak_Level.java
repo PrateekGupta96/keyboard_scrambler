@@ -17,8 +17,11 @@ import android.widget.TextView;
 
 public class Dvorak_Level extends KeyboardLevel {
 
-    private static final String theStr = "1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz ";
-    private static final String punctuation = "\",.?=\\:";
+    //private static final String theStr = "1234567890" + DELETE_CHAR + "\",.pyfgcrl?=\\aoeuidhtns:qjkxbmwvz ";
+    //private static final String punctuation = "\",.?=\\:";
+
+    private static final String theStr = "1234567890" + DELETE_CHAR + "\",.pyfgcrlaoeuidhtns:qjkxbmwvz ";
+    private static final String punctuation = "\",.:";
 
     private LinearLayout fifthRow;
 
@@ -49,16 +52,23 @@ public class Dvorak_Level extends KeyboardLevel {
         //Add the keys to the screen
         for(byte i = 0; i < 11; i++, counter++)
             firstRow.addView(getCharTV(reArranged.charAt(counter), 11));
-        for(byte i = 0; i < 13; i++, counter++)
-            secondRow.addView(getCharTV(reArranged.charAt(counter), 13));
+        for(byte i = 0; i < 10; i++, counter++)
+            secondRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 10; i++, counter++)
             thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
         for(byte i = 0; i < 10; i++, counter++)
             fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        final TextView spaceView = getCharTV(reArranged.charAt(counter), 3);
 
-        spaceView.setGravity(Gravity.CENTER_HORIZONTAL);
-        fifthRow.addView(spaceView);
+        final TextView blank1 = getCharTV(' ', 3);
+        final TextView space = getCharTV(' ', 3);
+        final TextView blank2 = getCharTV(' ', 3);
+
+        unformatView(blank1);
+        unformatView(blank2);
+
+        fifthRow.addView(blank1);
+        fifthRow.addView(space);
+        fifthRow.addView(blank2);
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
@@ -70,6 +80,14 @@ public class Dvorak_Level extends KeyboardLevel {
                 recreate();
             }
         });
+    }
+
+    private void unformatView(final TextView theView) {
+        theView.setOnClickListener(null);
+        theView.setClickable(false);
+        theView.setBackgroundResource(0);
+        theView.setBackgroundColor(Color.TRANSPARENT);
+        theView.setBackground(null);
     }
 
     protected String getLevelWord() {
