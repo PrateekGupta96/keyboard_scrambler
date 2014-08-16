@@ -12,21 +12,21 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 import java.text.DecimalFormat;
+import java.util.Random;
+
 /** Words:
  *  http://listofrandomwords.com/index.cfm?blist
  */
 
 public class SplashActivity extends Activity {
 
-    private TextView loadingTV;
     private final Context theC = this;
     private static final String fileName = "keyboard_scrambler_words.txt";
     private static final Random theRandom = new Random();
     private static final DecimalFormat theFormat = new DecimalFormat("00.00");
 
-    private final short WORDS = 4185;
+    private final int WORDS = 3185;
     private final short SIZE = 150;
 
     private long startTime;
@@ -39,17 +39,17 @@ public class SplashActivity extends Activity {
 
         startTime = System.currentTimeMillis();
 
-        loadingTV = (TextView) findViewById(R.id.loadingTV);
-
         new LoadWords().execute();
     }
 
     private class LoadWords extends AsyncTask<Void, Integer, String[]> {
 
-        final long startTime;
+        private final long startTime;
+        private final TextView loadingTV;
 
         public LoadWords() {
             startTime = System.currentTimeMillis();
+            loadingTV = (TextView) findViewById(R.id.loadingTV);
         }
 
         @Override
@@ -71,15 +71,23 @@ public class SplashActivity extends Activity {
                     counter++;
 
                     if(counter % 10 == 0) {
-                        loadingTV.setText("Loading... " +
-                                theFormat.format(((((double)counter / (double)WORDS)) * 100.0))
-                                + "%");
+                        final int theCounter = counter;
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                loadingTV.setText("Loading... " +
+                                        theFormat.format(((((double)theCounter / (double)WORDS)) * 100.0))
+                                        + "%");
+                            }
+                        });
                     }
                 }
                 return theInput.toString().split(" ");
             }
             catch (Exception e) {
                 e.printStackTrace();
+                log(e.toString());
                 return new String[]{e.toString()};
             }
 
@@ -97,6 +105,7 @@ public class SplashActivity extends Activity {
         @Override
         protected void onPostExecute(final String[] words) {
             final long st = System.currentTimeMillis();
+
 
             final boolean[] wordsChosen = new boolean[words.length];
             final String[] theWords = new String[SIZE];
@@ -122,24 +131,8 @@ public class SplashActivity extends Activity {
 
             log("Total time:\t" + (System.currentTimeMillis() - startTime));
 
-            int timeLeft = (int) ((System.currentTimeMillis() - startTime)/1000);
-
-            if(timeLeft >= MIN) {
-                startActivity(toHomeScreen);
-                finish();
-            }
-            else if(timeLeft < MIN) {
-                try {
-                    Thread.sleep(timeLeft/1000);
-                }
-                catch (Exception e) {
-                    startActivity(toHomeScreen);
-                    finish();
-                }
-
-                startActivity(toHomeScreen);
-                finish();
-            }
+            startActivity(toHomeScreen);
+            finish();
         }
     }
 
