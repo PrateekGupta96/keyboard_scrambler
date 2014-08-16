@@ -70,15 +70,13 @@ public class SplashActivity extends Activity {
                     theInput.append(" " + theReader.readLine());
                     counter++;
 
-                    if(counter % 10 == 0) {
-                        final int theCounter = counter;
+                    if(counter % 50 == 0) {
+                        final double theCounter = counter;
                         runOnUiThread(new Runnable() {
-
                             @Override
                             public void run() {
                                 loadingTV.setText("Loading... " +
-                                        theFormat.format(((((double)theCounter / (double)WORDS)) * 100.0))
-                                        + "%");
+                                        theFormat.format((((theCounter / WORDS)) * 100.0)) + "%");
                             }
                         });
                     }
