@@ -11,38 +11,43 @@
     <TextView
         style="@style/HomeScreenTVStyle"
         android:gravity="right"
-        android:layout_marginTop="80dp"
         android:layout_alignParentRight="true"
         android:textSize="30dp"
         android:text=""
         android:id="@+id/locationForChooseGameMenu"
-        android:textColor="#ff0099cc" />
+        android:textColor="#ff0099cc"
+        android:layout_above="@+id/startTV"/>
 
     <TextView
         style="@style/HomeScreenTVStyle"
-        android:layout_marginTop="100dp"
         android:text="Start"
         android:id="@+id/startTV"
-        android:layout_alignParentTop="true"/>
+        android:layout_above="@+id/howToPlayTV"/>
 
     <TextView
         style="@style/HomeScreenTVStyle"
         android:layout_marginTop="40dp"
         android:text="How to Play"
         android:id="@+id/howToPlayTV"
-        android:layout_below="@+id/startTV" />
+        android:layout_above="@+id/centerBlankTV" />
+
+    <!-- Blank textview to serve as the middle point -->
+    <TextView
+        style="@style/HomeScreenTVStyle"
+        android:layout_centerInParent="true"
+        android:id="@+id/centerBlankTV"
+        android:text="" />
 
     <TextView
         style="@style/HomeScreenTVStyle"
-        android:layout_marginTop="40dp"
         android:text="Scores"
         android:id="@+id/scoresTV"
-        android:layout_below="@+id/howToPlayTV" />
+        android:layout_below="@+id/centerBlankTV" />
 
     <TextView
         style="@style/HomeScreenTVStyle"
-        android:layout_marginTop="40dp"
         android:text="Rate on Play Store"
         android:id="@+id/rateTV"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/scoresTV" />
 </RelativeLayout>
