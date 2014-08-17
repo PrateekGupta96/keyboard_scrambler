@@ -1,11 +1,5 @@
 package com.ryan.keyboardscrambler;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import com.ryan.keyboardscrambler.R;
-import android.view.Gravity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
