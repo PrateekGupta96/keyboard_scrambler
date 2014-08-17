@@ -325,7 +325,7 @@ public abstract class KeyboardLevel extends Activity {
 
         if(scoreString.contains("N/F") || scoreString.contains("0")) {
             scoreString = "0";
-            lpsString = "0.00";
+            lpsString = String.valueOf(Double.MAX_VALUE);
         }
 
         final int scoreDiff = theScore.getScore() - Integer.parseInt(scoreString);
