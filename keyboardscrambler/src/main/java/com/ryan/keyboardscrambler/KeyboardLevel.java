@@ -338,15 +338,24 @@ public abstract class KeyboardLevel extends Activity {
             scoreV.setTextColor(Color.parseColor("#ff99cc00"));
         }
 
-        final double lpsDiff = theScore.getLettersPerSecond() -
-                Double.parseDouble(lpsString);
-        final TextView lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
+        final TextView lpsV;
+        final double lpsDiff;
 
-        if(lpsDiff > 0) {
-            lpsV.setTextColor(Color.parseColor("#ffff4444"));
+        if(Double.parseDouble(lpsString) == Double.MAX_VALUE) {
+            lpsDiff = theScore.getLettersPerSecond();
+            lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
+            lpsV.setTextColor(Color.parseColor("#ff99cc00"));
         }
         else {
-            lpsV.setTextColor(Color.parseColor("#ff99cc00"));
+            lpsDiff = theScore.getLettersPerSecond() - Double.parseDouble(lpsString);
+            lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
+
+            if(lpsDiff > 0) {
+                lpsV.setTextColor(Color.parseColor("#ffff4444"));
+            }
+            else {
+                lpsV.setTextColor(Color.parseColor("#ff99cc00"));
+            }
         }
 
         theLayout.addView(scoreV);
