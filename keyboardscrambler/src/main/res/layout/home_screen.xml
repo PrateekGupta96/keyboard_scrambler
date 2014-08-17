@@ -48,6 +48,7 @@
         style="@style/HomeScreenTVStyle"
         android:text="Rate on Play Store"
         android:id="@+id/rateTV"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
+        android:textSize="34sp"
         android:layout_below="@+id/scoresTV" />
 </RelativeLayout>
