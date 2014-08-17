@@ -126,7 +126,7 @@ public class HomeScreen extends Activity {
             medium.addView(getTV(getValue(TAG_MEDIUM_LPS), Gravity.CENTER));
 
             final LinearLayout pro = getLayout();
-            pro.addView(getTV("Pro       ", Gravity.LEFT));
+            pro.addView(getTV("Pro        ", Gravity.LEFT));
             pro.addView(getTV(getValue(TAG_DIFFICULT_SCORE), Gravity.CENTER));
             pro.addView(getTV(getValue(TAG_DIFFICULT_LPS), Gravity.CENTER));
 
