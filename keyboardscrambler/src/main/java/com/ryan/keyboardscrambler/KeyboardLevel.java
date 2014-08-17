@@ -320,16 +320,16 @@ public abstract class KeyboardLevel extends Activity {
 
         theLayout.addView(getTV("Difference", Gravity.LEFT));
 
-        final String aString = getValue(getLevelTagScore(theScore.getLevel()));
+        String scoreString = getValue(getLevelTagScore(theScore.getLevel()));
+        String lpsString = getValue(getLevelTagLPS(theScore.getLevel()));
 
-        if(aString.contains("N/F") || aString.contains("0")) {
-            theLayout.addView(getTV("N/F", Gravity.CENTER));
-            theLayout.addView(getTV("N/F", Gravity.CENTER));
-            return theLayout;
+        if(scoreString.contains("N/F") || scoreString.contains("0")) {
+            scoreString = "0";
+            lpsString = "0.00";
         }
 
-        final int scoreDiff = theScore.getScore() - Integer.parseInt(aString);
-        final TextView scoreV = getTV(String.valueOf(scoreDiff), Gravity.CENTER);
+        final int scoreDiff = theScore.getScore() - Integer.parseInt(scoreString);
+        final TextView scoreV = getTV(scoreString, Gravity.CENTER);
 
         if(scoreDiff < 0) {
             scoreV.setTextColor(Color.parseColor("#ffff4444"));
@@ -339,7 +339,7 @@ public abstract class KeyboardLevel extends Activity {
         }
 
         final double lpsDiff = theScore.getLettersPerSecond() -
-                Double.parseDouble(getValue(getLevelTagLPS(theScore.getLevel())));
+                Double.parseDouble(lpsString);
         final TextView lpsV = getTV(theFormat.format(lpsDiff), Gravity.CENTER);
 
         if(lpsDiff > 0) {

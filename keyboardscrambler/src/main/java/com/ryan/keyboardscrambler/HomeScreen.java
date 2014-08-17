@@ -131,7 +131,7 @@ public class HomeScreen extends Activity {
             pro.addView(getTV(getValue(TAG_DIFFICULT_LPS), Gravity.CENTER));
 
             final LinearLayout dvorak = getLayout();
-            dvorak.addView(getTV("Dvorak    ", Gravity.LEFT));
+            dvorak.addView(getTV("Dvorak  ", Gravity.LEFT));
             dvorak.addView(getTV(getValue(TAG_DVORAK_SCORE), Gravity.CENTER));
             dvorak.addView(getTV(getValue(TAG_DVORAK_LPS), Gravity.CENTER));
 
