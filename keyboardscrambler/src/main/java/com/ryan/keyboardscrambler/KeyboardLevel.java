@@ -78,6 +78,7 @@ public abstract class KeyboardLevel extends Activity {
 
     protected void onCreate(Bundle savedInstanceState, String[] theWords) {
         super.onCreate(savedInstanceState);
+        this.theC = getApplicationContext();
         this.theWords = theWords;
         setDimensions();
         getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
@@ -163,7 +164,6 @@ public abstract class KeyboardLevel extends Activity {
         theV.setTextColor(Color.BLACK);
         theV.setBackgroundResource(R.drawable.keycharacter_border);
         theV.setOnClickListener(KeyPressedListener);
-        new RippleView(theC, theV);
         return theV;
     }
 

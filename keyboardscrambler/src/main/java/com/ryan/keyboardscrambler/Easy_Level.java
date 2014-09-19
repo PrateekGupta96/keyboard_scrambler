@@ -36,8 +36,11 @@ public class Easy_Level extends KeyboardLevel {
         int counter = 0;
 
         //Add the keys to the screen
-        for(byte i = 0; i < 10; i++, counter++)
-            firstRow.addView(getCharTV(reArranged.charAt(counter), 10));
+        for(byte i = 0; i < 10; i++, counter++) {
+            final TextView view = getCharTV(reArranged.charAt(counter), 10);
+            firstRow.addView(view);
+            new RippleView(this, view);
+        }
         for(byte i = 0; i < 9; i++, counter++)
             secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
         for(byte i = 0; i < 9; i++, counter++)
