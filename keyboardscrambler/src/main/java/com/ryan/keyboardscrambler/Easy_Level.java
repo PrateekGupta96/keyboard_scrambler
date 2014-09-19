@@ -41,17 +41,17 @@ public class Easy_Level extends KeyboardLevel {
         for(byte i = 0; i < 10; i++, counter++) {
             view = getCharTV(reArranged.charAt(counter), 10);
             firstRow.addView(view);
-            new RippleView(this, view);
+            //new RippleView(this, view);
         }
         for(byte i = 0; i < 9; i++, counter++) {
             view = getCharTV(reArranged.charAt(counter), 9);
             secondRow.addView(view);
-            new RippleView(this, view);
+            //new RippleView(this, view);
         }
         for(byte i = 0; i < 9; i++, counter++) {
             view = getCharTV(reArranged.charAt(counter), 9);
             thirdRow.addView(view);
-            new RippleView(this, view);
+            //new RippleView(this, view);
         }
 
         //Refresh button --> DEV PURPOSES

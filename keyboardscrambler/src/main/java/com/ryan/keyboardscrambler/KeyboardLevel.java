@@ -26,6 +26,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 /**
  * A level of the game
  */
@@ -74,6 +76,8 @@ public abstract class KeyboardLevel extends Activity {
     private UpdateTimeTV theUpdater;
     private int secs, minutes, seconds, milliseconds;
 
+    protected Animation theAnim;
+
     protected abstract String getLevelWord();
 
     protected void onCreate(Bundle savedInstanceState, String[] theWords) {
@@ -85,6 +89,7 @@ public abstract class KeyboardLevel extends Activity {
 
         theC = getApplicationContext();
         highScores = getApplicationContext().getSharedPreferences(TAG_HIGH_SCORE, 0);
+        this.theAnim = AnimationUtils.loadAnimation(theC, com.ryan.keyboardscrambler.R.anim.circle_animation);
     }
 
     /**
@@ -171,6 +176,7 @@ public abstract class KeyboardLevel extends Activity {
         @Override
         public void onClick(View v) {
             final TextView theV = (TextView) v;
+            v.startAnimation(theAnim);
 
             if (!hasStarted) {
                 hasStarted = true;
