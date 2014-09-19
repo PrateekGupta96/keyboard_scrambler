@@ -7,7 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 public class Easy_Level extends KeyboardLevel {
 
     private static final String theStr = "abcdefghijklmnopqrstuvwxyz " + DELETE_CHAR;
