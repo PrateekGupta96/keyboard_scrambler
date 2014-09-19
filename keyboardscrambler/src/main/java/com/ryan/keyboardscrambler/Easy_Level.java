@@ -35,16 +35,21 @@ public class Easy_Level extends KeyboardLevel {
         final String reArranged = scrambleString(this.theStr);
         int counter = 0;
 
+        View view;
         //Add the keys to the screen
         for(byte i = 0; i < 10; i++, counter++) {
-            final TextView view = getCharTV(reArranged.charAt(counter), 10);
+            view = getCharTV(reArranged.charAt(counter), 10);
             firstRow.addView(view);
             new RippleView(this, view);
         }
-        for(byte i = 0; i < 9; i++, counter++)
-            secondRow.addView(getCharTV(reArranged.charAt(counter), 9));
-        for(byte i = 0; i < 9; i++, counter++)
-            thirdRow.addView(getCharTV(reArranged.charAt(counter), 9));
+        for(byte i = 0; i < 9; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 9);
+            secondRow.addView(view);
+        }
+        for(byte i = 0; i < 9; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 9);
+            thirdRow.addView(view);
+        }
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
