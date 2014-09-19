@@ -43,15 +43,28 @@ public class Dvorak_Level extends KeyboardLevel {
         final String reArranged = this.theStr;
         int counter = 0;
 
+        View view;
         //Add the keys to the screen
-        for(byte i = 0; i < 11; i++, counter++)
-            firstRow.addView(getCharTV(reArranged.charAt(counter), 11));
-        for(byte i = 0; i < 10; i++, counter++)
-            secondRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(byte i = 0; i < 10; i++, counter++)
-            thirdRow.addView(getCharTV(reArranged.charAt(counter), 10));
-        for(byte i = 0; i < 10; i++, counter++)
-            fourthRow.addView(getCharTV(reArranged.charAt(counter), 10));
+        for(byte i = 0; i < 11; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 11);
+            firstRow.addView(view);
+            new RippleView(this, view);
+        }
+        for(byte i = 0; i < 10; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 10);
+            secondRow.addView(view);
+            new RippleView(this, view);
+        }
+        for(byte i = 0; i < 10; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 10);
+            thirdRow.addView(view);
+            new RippleView(this, view);
+        }
+        for(byte i = 0; i < 10; i++, counter++) {
+            view = getCharTV(reArranged.charAt(counter), 10);
+            fourthRow.addView(view);
+            new RippleView(this, view);
+        }
 
         final TextView blank1 = getCharTV(' ', 4);
         final TextView space = getCharTV(' ', 2);
@@ -63,6 +76,8 @@ public class Dvorak_Level extends KeyboardLevel {
         fifthRow.addView(blank1);
         fifthRow.addView(space);
         fifthRow.addView(blank2);
+
+        new RippleView(this, space);
 
         //Refresh button --> DEV PURPOSES
         refresh = (TextView) findViewById(R.id.refresh);
