@@ -36,10 +36,23 @@ public class Easy_Level extends KeyboardLevel {
         final String reArranged = scrambleString(this.theStr);
         int counter = 0;
 
-        View view;
+        TextView view;
         //Add the keys to the screen
         for(byte i = 0; i < 10; i++, counter++) {
             view = getCharTV(reArranged.charAt(counter), 10);
+            view.setBackgroundResource(com.ryan.keyboardscrambler.R.drawable.circular_button_selector);
+            view.setTextColor(getResources().getColor(com.ryan.keyboardscrambler.R.color.button_text_selector));
+            view.setOnClickListener(new android.view.View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v) {
+                    if(v.isSelected()) {
+                        v.setSelected(false);
+                    }
+                    else {
+                        v.setSelected(true);
+                    }
+                }
+            });
             firstRow.addView(view);
             //new RippleView(this, view);
         }
